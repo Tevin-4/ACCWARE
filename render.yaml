@@ -1,0 +1,10 @@
+services:
+  - type: static_site
+    name: accware
+    runtime: static
+    buildCommand: echo "Static site, no build needed"
+    staticPublishPath: ./new-site
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
