@@ -164,27 +164,78 @@ h1, h2, h3, h4 { margin: 0; font-family: var(--font-display); line-height: 1.1; 
   to { transform: translateY(0); opacity: 1; }
 }
 .site-header {
-  position: sticky;
+  position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
   z-index: 50;
-  background: rgba(255, 255, 255, 0.96);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid var(--line);
+  padding: 0 var(--gutter);
   animation: headerSlideDown 0.5s var(--ease) both;
-  transition: box-shadow 0.3s var(--ease), background 0.3s var(--ease);
+  transition: padding 0.4s var(--ease), background 0.4s var(--ease), border-radius 0.4s var(--ease), box-shadow 0.4s var(--ease), max-width 0.4s var(--ease), top 0.4s var(--ease);
 }
+.site-header .header-inner {
+  transition: height 0.4s var(--ease), background 0.4s var(--ease), border-radius 0.4s var(--ease), padding 0.4s var(--ease), box-shadow 0.4s var(--ease);
+}
+
+/* Scrolled pill state */
 .site-header.scrolled {
-  background: rgba(255, 255, 255, 0.99);
-  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.08);
+  top: 12px;
+  padding: 0 calc(50% - min(480px, 45vw));
 }
+.site-header.scrolled .header-inner {
+  background: rgba(22, 22, 22, 0.88);
+  backdrop-filter: blur(20px) saturate(1.4);
+  -webkit-backdrop-filter: blur(20px) saturate(1.4);
+  border-radius: 100px;
+  height: 56px;
+  padding: 0 24px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+.site-header.scrolled .primary-nav a,
+.site-header.scrolled .drop-toggle {
+  color: rgba(255, 255, 255, 0.75);
+}
+.site-header.scrolled .primary-nav a:hover,
+.site-header.scrolled .drop-toggle:hover,
+.site-header.scrolled .primary-nav a.active {
+  color: #fff;
+}
+.site-header.scrolled .primary-nav a::after {
+  background: var(--gold);
+}
+.site-header.scrolled .brand img {
+  height: 36px;
+  filter: brightness(0) invert(1);
+}
+.site-header.scrolled .nav-toggle {
+  color: #fff;
+}
+.site-header.scrolled .dropdown {
+  background: rgba(22, 22, 22, 0.95);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+.site-header.scrolled .dropdown a {
+  color: rgba(255, 255, 255, 0.8);
+}
+.site-header.scrolled .dropdown a:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+}
+
+/* Spacer to push content below fixed header */
+.header-spacer {
+  height: var(--header-h);
+}
+
 .header-inner {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 20px;
   height: var(--header-h);
+  border-radius: 0;
 }
-.brand img { height: 52px; width: auto; }
+.brand img { height: 52px; width: auto; transition: height 0.4s var(--ease), filter 0.4s var(--ease); }
 
 .primary-nav ul { list-style: none; display: flex; align-items: center; gap: 4px; }
 .primary-nav a,
@@ -794,19 +845,30 @@ tr:last-child td { border-bottom: 0; }
 @media (max-width: 760px) {
   body { font-size: 16px; }
 
+  .site-header { padding: 0 12px; }
+  .site-header.scrolled { top: 8px; padding: 0 12px; }
+  .site-header.scrolled .header-inner {
+    border-radius: 16px;
+    height: 52px;
+    padding: 0 16px;
+  }
+
   .nav-toggle { display: block; }
   .primary-nav {
     position: absolute;
-    top: var(--header-h);
+    top: 56px;
     left: 0; right: 0;
-    background: var(--white);
-    border-bottom: 1px solid var(--line);
+    background: rgba(22, 22, 22, 0.96);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 0 0 16px 16px;
     max-height: 0;
     overflow: hidden;
     transition: max-height 0.4s var(--ease);
   }
   .primary-nav.open { max-height: 90vh; overflow-y: auto; }
-  .primary-nav ul { flex-direction: column; align-items: stretch; gap: 0; padding: 12px var(--gutter) 20px; }
+  .primary-nav ul { flex-direction: column; align-items: stretch; gap: 0; padding: 12px 16px 20px; }
   .primary-nav > ul > li {
     opacity: 0;
     transform: translateX(-20px);
@@ -825,7 +887,8 @@ tr:last-child td { border-bottom: 0; }
   @keyframes navItemIn {
     to { opacity: 1; transform: translateX(0); }
   }
-  .primary-nav a, .drop-toggle { width: 100%; text-align: left; font-size: 16px; padding: 13px 8px; color: var(--ink); }
+  .primary-nav a, .drop-toggle { width: 100%; text-align: left; font-size: 16px; padding: 13px 8px; color: rgba(255, 255, 255, 0.85); }
+  .primary-nav a:hover, .drop-toggle:hover { color: #fff; }
   .has-dropdown { position: static; }
   .has-dropdown:hover > .dropdown { opacity: 0; visibility: hidden; max-height: 0; display: none; }
   .has-dropdown.open:hover > .dropdown { opacity: 1; visibility: visible; display: block; max-height: 300px; }

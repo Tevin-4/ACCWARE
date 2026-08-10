@@ -126,7 +126,7 @@
     if (!el) return;
     el.outerHTML =
       '<header class="site-header">' +
-      '<div class="container header-inner">' +
+      '<div class="header-inner">' +
       '<a class="brand" href="index.html" aria-label="Accware Solutions — home">' +
       '<img src="assets/logos/topbar%20design.webp" alt="Accware Solutions" />' +
       "</a>" +
@@ -137,7 +137,8 @@
       navMarkup() +
       "</ul></nav>" +
       "</div>" +
-      "</header>";
+      "</header>" +
+      '<div class="header-spacer"></div>';
   }
 
   function renderFooter() {
@@ -167,7 +168,7 @@
     }
     if (header) {
       window.addEventListener("scroll", function () {
-        header.classList.toggle("scrolled", window.scrollY > 40);
+        header.classList.toggle("scrolled", window.scrollY > 80);
       }, { passive: true });
     }
     document.querySelectorAll(".has-dropdown .drop-toggle").forEach(function (btn) {
