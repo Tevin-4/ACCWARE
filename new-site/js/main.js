@@ -102,7 +102,7 @@
       '<div class="footer-grid">' +
       '<div class="footer-brand">' +
       '<a href="index.html" style="display:inline-block;margin-bottom:16px;">' +
-      '<img src="assets/logos/topbar design.png" alt="Accware Solutions" style="height:40px;width:auto;" />' +
+      '<img src="assets/logos/topbar%20design.webp" alt="Accware Solutions" style="height:40px;width:auto;" />' +
       '</a>' +
       "<p>Your bridge to productive ERP solutions. Integrated business management applications that unify your workforce, process workflows and technology.</p>" +
       '<div class="footer-social">' +
@@ -128,7 +128,7 @@
       '<header class="site-header">' +
       '<div class="container header-inner">' +
       '<a class="brand" href="index.html" aria-label="Accware Solutions — home">' +
-      '<img src="assets/logos/topbar design.png" alt="Accware Solutions" />' +
+      '<img src="assets/logos/topbar%20design.webp" alt="Accware Solutions" />' +
       "</a>" +
       '<button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="primary-nav">' +
       '<span class="bar"></span><span class="bar"></span><span class="bar"></span>' +
