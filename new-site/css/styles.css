@@ -423,7 +423,7 @@ h1, h2, h3, h4 { margin: 0; font-family: var(--font-display); line-height: 1.1; 
   gap: clamp(48px, 7vw, 96px);
   padding: 26px 0 32px;
   width: max-content;
-  animation: marqueeScroll 40s linear infinite;
+  animation: marqueeScroll 80s linear infinite;
 }
 .marquee-track img {
   height: 44px;
