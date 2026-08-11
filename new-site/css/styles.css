@@ -418,14 +418,14 @@ h1, h2, h3, h4 { margin: 0; font-family: var(--font-display); line-height: 1.1; 
   display: flex;
   width: max-content;
   padding: 26px 0 32px;
-  animation: marqueeScroll 60s linear infinite;
+  animation: marqueeScroll 80s linear infinite;
 }
 .marquee-viewport:hover { animation-play-state: paused; }
 .marquee-track {
   display: flex;
   align-items: center;
-  gap: clamp(28px, 5vw, 64px);
-  padding-right: clamp(28px, 5vw, 64px);
+  gap: clamp(48px, 7vw, 96px);
+  padding-right: clamp(48px, 7vw, 96px);
   flex-shrink: 0;
 }
 .marquee-track img {
