@@ -170,11 +170,29 @@ h1, h2, h3, h4 { margin: 0; font-family: var(--font-display); line-height: 1.1; 
   right: 0;
   z-index: 50;
   padding: 0 var(--gutter);
+  background: transparent;
   animation: headerSlideDown 0.5s var(--ease) both;
   transition: padding 0.4s var(--ease), background 0.4s var(--ease), border-radius 0.4s var(--ease), box-shadow 0.4s var(--ease), max-width 0.4s var(--ease), top 0.4s var(--ease);
 }
 .site-header .header-inner {
   transition: height 0.4s var(--ease), background 0.4s var(--ease), border-radius 0.4s var(--ease), padding 0.4s var(--ease), box-shadow 0.4s var(--ease);
+}
+
+/* At top: transparent header over dark hero */
+.site-header .header-inner {
+  background: transparent;
+}
+.site-header .primary-nav a,
+.site-header .drop-toggle {
+  color: rgba(255, 255, 255, 0.8);
+}
+.site-header .primary-nav a:hover,
+.site-header .drop-toggle:hover,
+.site-header .primary-nav a.active {
+  color: #fff;
+}
+.site-header .nav-toggle {
+  color: #fff;
 }
 
 /* Scrolled pill state */
@@ -847,10 +865,20 @@ tr:last-child td { border-bottom: 0; }
   .site-header { padding: 0 12px; }
   .site-header.scrolled { top: 8px; padding: 0 12px; }
   .site-header.scrolled .header-inner {
+    background: rgba(22, 22, 22, 0.88);
+    backdrop-filter: blur(20px) saturate(1.4);
+    -webkit-backdrop-filter: blur(20px) saturate(1.4);
     border-radius: 16px;
     height: 52px;
     padding: 0 16px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
   }
+  .site-header.scrolled .primary-nav a,
+  .site-header.scrolled .drop-toggle { color: rgba(255, 255, 255, 0.75); }
+  .site-header.scrolled .primary-nav a:hover,
+  .site-header.scrolled .drop-toggle:hover { color: #fff; }
+  .site-header.scrolled .brand img { height: 32px; }
+  .site-header.scrolled .nav-toggle { color: #fff; }
 
   .nav-toggle { display: block; }
   .primary-nav {
