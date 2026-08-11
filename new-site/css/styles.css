@@ -188,7 +188,7 @@ h1, h2, h3, h4 { margin: 0; font-family: var(--font-display); line-height: 1.1; 
 
 /* Scrolled: floating pill */
 .site-header.scrolled .header-inner {
-  max-width: 580px;
+  max-width: min(680px, 92vw);
   margin: 0 auto;
   border-radius: 100px;
   height: 56px;
