@@ -37,7 +37,7 @@
 *::before,
 *::after { box-sizing: border-box; }
 
-html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; overflow-x: hidden; }
 
 body {
   margin: 0;
@@ -47,6 +47,7 @@ body {
   color: var(--ink);
   background: var(--paper);
   -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
 }
 
 img { max-width: 100%; display: block; }
@@ -304,8 +305,9 @@ h1, h2, h3, h4 { margin: 0; font-family: var(--font-display); line-height: 1.1; 
     linear-gradient(160deg, var(--ink) 0%, var(--navy-2) 130%);
   background-size: 44px 44px, 44px 44px, auto, auto;
   color: var(--white);
-  padding-block: clamp(72px, 9vw, 120px);
+  padding-block: clamp(40px, 6vw, 80px);
 }
+.hero > * { max-width: 100%; }
 .hero::after {
   content: "";
   position: absolute;
@@ -801,6 +803,8 @@ tr:last-child td { border-bottom: 0; }
   .stepper { grid-template-columns: repeat(2, 1fr); row-gap: 34px; }
   .footer-grid { grid-template-columns: 1fr 1fr; }
   .hero-grid, .split, .contact-grid { grid-template-columns: 1fr; }
+  .hero { padding-block: clamp(24px, 5vw, 48px); }
+  .hero-title { font-size: clamp(1.8rem, 7vw, 2.6rem); }
   .bridge-panel { order: -1; }
   .chip-a { left: 2%; }
   .chip-b { right: 2%; }
