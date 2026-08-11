@@ -877,9 +877,6 @@ tr:last-child td { border-bottom: 0; }
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     border-bottom: 1px solid var(--line);
-    transition: background 0.4s var(--ease), border-radius 0.4s var(--ease),
-      height 0.4s var(--ease), padding 0.4s var(--ease),
-      box-shadow 0.4s var(--ease), border-color 0.4s var(--ease);
   }
   .site-header .nav-toggle { color: var(--ink); }
   .site-header .primary-nav a,
@@ -888,66 +885,49 @@ tr:last-child td { border-bottom: 0; }
   .site-header .dropdown a { color: var(--ink-mid); }
   .site-header .dropdown a:hover { color: var(--gold); background: none; }
 
-  .site-header.scrolled { top: 8px; padding: 0 14px; }
+  .site-header.scrolled { top: 0; padding: 0; }
   .site-header.scrolled .header-inner {
-    background: rgba(22, 22, 22, 0.85);
-    backdrop-filter: blur(20px) saturate(1.4);
-    -webkit-backdrop-filter: blur(20px) saturate(1.4);
-    border-radius: 100px;
-    height: 48px;
-    padding: 0 16px;
-    border-bottom: none;
-    box-shadow: 0 6px 28px rgba(0, 0, 0, 0.25);
+    background: rgba(255, 255, 255, 0.96);
+    border-radius: 0;
+    height: var(--header-h);
+    padding: 0 12px;
+    border-bottom: 1px solid var(--line);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
   }
-  .site-header.scrolled .brand img { height: 28px; }
-  .site-header.scrolled .nav-toggle { color: #fff; padding: 6px; }
-  .site-header.scrolled .primary-nav a,
-  .site-header.scrolled .drop-toggle { color: rgba(255, 255, 255, 0.75); }
-  .site-header.scrolled .primary-nav a:hover,
-  .site-header.scrolled .drop-toggle:hover,
-  .site-header.scrolled .primary-nav a.active { color: #fff; }
+  .site-header.scrolled .brand img { height: 52px; }
   .site-header.scrolled .primary-nav a::after { background: var(--gold); }
-  .site-header.scrolled .dropdown {
-    background: rgba(30, 30, 30, 0.97);
-    border-color: rgba(255, 255, 255, 0.08);
-  }
-  .site-header.scrolled .dropdown a { color: rgba(255, 255, 255, 0.78); }
-  .site-header.scrolled .dropdown a:hover { background: rgba(255, 255, 255, 0.06); color: #fff; }
 
   .nav-toggle { display: block; }
   .primary-nav {
-    position: absolute;
-    top: 100%;
-    left: 0; right: 0;
+    position: fixed;
+    top: var(--header-h);
+    left: 0; right: 0; bottom: 0;
     background: var(--white);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
     border-bottom: 1px solid var(--line);
-    border-radius: 0 0 16px 16px;
     max-height: 0;
     overflow: hidden;
     transition: max-height 0.4s var(--ease);
+    z-index: 49;
   }
-  .primary-nav.open { max-height: 90vh; overflow-y: auto; }
+  .primary-nav.open { max-height: calc(100vh - var(--header-h)); overflow-y: auto; }
   .primary-nav ul { flex-direction: column; align-items: stretch; gap: 0; padding: 12px 16px 20px; }
   .primary-nav > ul > li {
     opacity: 0;
     transform: translateX(-20px);
+    transition: opacity 0.3s var(--ease), transform 0.3s var(--ease);
   }
   .primary-nav.open > ul > li {
-    animation: navItemIn 0.35s var(--ease) forwards;
+    opacity: 1;
+    transform: translateX(0);
   }
-  .primary-nav.open > ul > li:nth-child(1) { animation-delay: 0.05s; }
-  .primary-nav.open > ul > li:nth-child(2) { animation-delay: 0.1s; }
-  .primary-nav.open > ul > li:nth-child(3) { animation-delay: 0.15s; }
-  .primary-nav.open > ul > li:nth-child(4) { animation-delay: 0.2s; }
-  .primary-nav.open > ul > li:nth-child(5) { animation-delay: 0.25s; }
-  .primary-nav.open > ul > li:nth-child(6) { animation-delay: 0.3s; }
-  .primary-nav.open > ul > li:nth-child(7) { animation-delay: 0.35s; }
-  .primary-nav.open > ul > li:nth-child(8) { animation-delay: 0.4s; }
-  @keyframes navItemIn {
-    to { opacity: 1; transform: translateX(0); }
-  }
+  .primary-nav.open > ul > li:nth-child(1) { transition-delay: 0.05s; }
+  .primary-nav.open > ul > li:nth-child(2) { transition-delay: 0.1s; }
+  .primary-nav.open > ul > li:nth-child(3) { transition-delay: 0.15s; }
+  .primary-nav.open > ul > li:nth-child(4) { transition-delay: 0.2s; }
+  .primary-nav.open > ul > li:nth-child(5) { transition-delay: 0.25s; }
+  .primary-nav.open > ul > li:nth-child(6) { transition-delay: 0.3s; }
+  .primary-nav.open > ul > li:nth-child(7) { transition-delay: 0.35s; }
+  .primary-nav.open > ul > li:nth-child(8) { transition-delay: 0.4s; }
   .primary-nav a, .drop-toggle { width: 100%; text-align: left; font-size: 16px; padding: 13px 8px; color: var(--ink); }
   .primary-nav a:hover, .drop-toggle:hover { color: var(--gold); }
   .has-dropdown { position: static; }
