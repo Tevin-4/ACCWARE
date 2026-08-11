@@ -399,6 +399,10 @@ h1, h2, h3, h4 { margin: 0; font-family: var(--font-display); line-height: 1.1; 
 .chip-b { bottom: 16%; right: 2%; }
 
 /* ---------- Logo marquee ---------- */
+@keyframes marqueeScroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-100%); }
+}
 .marquee { border-bottom: 1px solid var(--line); background: var(--white); overflow: hidden; }
 .marquee-label {
   text-align: center;
@@ -409,6 +413,28 @@ h1, h2, h3, h4 { margin: 0; font-family: var(--font-display); line-height: 1.1; 
   color: var(--ink-mid);
   padding: 26px 0 4px;
 }
+.marquee-viewport {
+  display: flex;
+  width: max-content;
+  padding: 26px 0 32px;
+  animation: marqueeScroll 28s linear infinite;
+}
+.marquee-viewport:hover { animation-play-state: paused; }
+.marquee-track {
+  display: flex;
+  align-items: center;
+  gap: clamp(28px, 5vw, 64px);
+  padding-right: clamp(28px, 5vw, 64px);
+  flex-shrink: 0;
+}
+.marquee-track img {
+  height: 38px;
+  width: auto;
+  opacity: 0.8;
+  transition: opacity 0.25s, transform 0.25s var(--ease);
+}
+.marquee-track img:hover { opacity: 1; transform: translateY(-2px); }
+.marquee-track .tall { height: 52px; }
 
 /* ---------- Cards ---------- */
 .grid { display: grid; gap: 24px; }
@@ -738,20 +764,6 @@ tr:last-child td { border-bottom: 0; }
 /* ---------- Hero entrance animation — removed ---------- */
 
 /* ---------- Floating chip — static, no bob ---------- */
-
-/* ---------- Logo marquee — static, no scroll ---------- */
-.marquee { overflow: hidden; }
-.marquee-track {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  gap: clamp(28px, 5vw, 64px);
-  padding: 26px 0 32px;
-}
-.marquee-track img { height: 38px; width: auto; opacity: 0.55; filter: grayscale(1); transition: opacity 0.25s, filter 0.25s, transform 0.25s var(--ease); }
-.marquee-track img:hover { opacity: 1; filter: none; transform: translateY(-2px); }
-.marquee-track .tall { height: 52px; }
 
 /* ---------- Button hover micro-interactions ---------- */
 .btn { transition: transform 0.2s var(--ease), box-shadow 0.2s var(--ease), background 0.2s var(--ease), color 0.2s var(--ease), border-color 0.2s var(--ease); }
