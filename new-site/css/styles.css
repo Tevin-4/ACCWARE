@@ -877,6 +877,9 @@ tr:last-child td { border-bottom: 0; }
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     border-bottom: 1px solid var(--line);
+    transition: background 0.4s var(--ease), border-radius 0.4s var(--ease),
+      height 0.4s var(--ease), padding 0.4s var(--ease),
+      box-shadow 0.4s var(--ease), border-color 0.4s var(--ease);
   }
   .site-header .nav-toggle { color: var(--ink); }
   .site-header .primary-nav a,
@@ -885,17 +888,31 @@ tr:last-child td { border-bottom: 0; }
   .site-header .dropdown a { color: var(--ink-mid); }
   .site-header .dropdown a:hover { color: var(--gold); background: none; }
 
-  .site-header.scrolled { top: 0; padding: 0; }
+  .site-header.scrolled { top: 8px; padding: 0 14px; }
   .site-header.scrolled .header-inner {
-    background: rgba(255, 255, 255, 0.96);
-    border-radius: 0;
-    height: var(--header-h);
-    padding: 0 12px;
-    border-bottom: 1px solid var(--line);
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+    background: rgba(22, 22, 22, 0.85);
+    backdrop-filter: blur(20px) saturate(1.4);
+    -webkit-backdrop-filter: blur(20px) saturate(1.4);
+    border-radius: 100px;
+    height: 48px;
+    padding: 0 16px;
+    border-bottom: none;
+    box-shadow: 0 6px 28px rgba(0, 0, 0, 0.25);
   }
-  .site-header.scrolled .brand img { height: 52px; }
+  .site-header.scrolled .brand img { height: 28px; }
+  .site-header.scrolled .nav-toggle { color: #fff; padding: 6px; }
+  .site-header.scrolled .primary-nav a,
+  .site-header.scrolled .drop-toggle { color: rgba(255, 255, 255, 0.75); }
+  .site-header.scrolled .primary-nav a:hover,
+  .site-header.scrolled .drop-toggle:hover,
+  .site-header.scrolled .primary-nav a.active { color: #fff; }
   .site-header.scrolled .primary-nav a::after { background: var(--gold); }
+  .site-header.scrolled .dropdown {
+    background: rgba(30, 30, 30, 0.97);
+    border-color: rgba(255, 255, 255, 0.08);
+  }
+  .site-header.scrolled .dropdown a { color: rgba(255, 255, 255, 0.78); }
+  .site-header.scrolled .dropdown a:hover { background: rgba(255, 255, 255, 0.06); color: #fff; }
 
   .nav-toggle { display: block; }
   .primary-nav {
