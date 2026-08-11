@@ -130,6 +130,7 @@
       '<a class="brand" href="index.html" aria-label="Accware Solutions — home">' +
       '<img src="assets/logos/topbar%20design.webp" alt="Accware Solutions" />' +
       "</a>" +
+      '<a class="header-cta btn btn-gold" href="reach-us.html">Get in Touch</a>' +
       '<button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="primary-nav">' +
       '<span class="bar"></span><span class="bar"></span><span class="bar"></span>' +
       "</button>" +
