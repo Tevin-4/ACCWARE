@@ -137,8 +137,7 @@
       navMarkup() +
       "</ul></nav>" +
       "</div>" +
-      "</header>" +
-      '<div class="header-spacer"></div>';
+      "</header>";
   }
 
   function renderFooter() {
