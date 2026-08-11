@@ -37,7 +37,11 @@
 *::before,
 *::after { box-sizing: border-box; }
 
-html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; overflow-x: hidden; }
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  overflow-x: hidden;
+}
 
 body {
   margin: 0;
@@ -220,8 +224,8 @@ h1, h2, h3, h4 { margin: 0; font-family: var(--font-display); line-height: 1.1; 
 .site-header.scrolled .dropdown a { color: rgba(255, 255, 255, 0.78); }
 .site-header.scrolled .dropdown a:hover { background: rgba(255, 255, 255, 0.06); color: #fff; }
 
-/* Spacer for fixed header */
-.header-spacer { height: calc(var(--header-h) + 24px); }
+/* Spacer for fixed header — first section accounts for fixed header */
+.site-header + * { padding-top: calc(var(--header-h) + 24px); }
 
 .header-inner {
   display: flex;
@@ -231,9 +235,8 @@ h1, h2, h3, h4 { margin: 0; font-family: var(--font-display); line-height: 1.1; 
 }
 .brand img { height: 52px; width: auto; transition: height 0.45s var(--ease); }
 
-.header-cta { margin-left: auto; white-space: nowrap; }
-.site-header.scrolled .header-cta { padding: 10px 20px; font-size: 13px; }
-.nav-cta { display: none; }
+.header-cta { display: none; }
+.nav-cta .btn { white-space: nowrap; }
 
 .primary-nav ul { list-style: none; display: flex; align-items: center; gap: 4px; }
 .primary-nav a,
@@ -873,7 +876,6 @@ tr:last-child td { border-bottom: 0; }
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
   }
   .site-header.scrolled .brand img { height: 32px; }
-  .site-header.scrolled .header-cta { padding: 8px 16px; font-size: 12.5px; }
   .header-spacer { height: calc(var(--header-h) + 4px); }
 
   .nav-toggle { display: block; }
@@ -927,8 +929,6 @@ tr:last-child td { border-bottom: 0; }
   .dropdown a:hover { background: none; color: var(--gold); }
   .primary-nav .nav-cta a { width: 100%; text-align: center; justify-content: center; color: var(--white); background: var(--gold-grad); }
   .primary-nav .nav-cta a:hover { color: var(--white); }
-  .nav-cta { display: block !important; }
-  .header-cta { display: none !important; }
 
   .cols-2, .cols-3, .cols-4, .cols-6 { grid-template-columns: 1fr; }
   .stats { grid-template-columns: 1fr 1fr; }
