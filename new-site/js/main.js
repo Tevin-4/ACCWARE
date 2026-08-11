@@ -81,9 +81,6 @@
       var cls = current === link.href ? ' class="active" aria-current="page"' : "";
       return '<li><a href="' + link.href + '"' + cls + ">" + link.label + "</a></li>";
     });
-    items.push(
-      '<li class="nav-cta"><a class="btn btn-gold" href="reach-us.html">Get in Touch</a></li>'
-    );
     return items.join("");
   }
 
