@@ -224,8 +224,9 @@ h1, h2, h3, h4 { margin: 0; font-family: var(--font-display); line-height: 1.1; 
 .site-header.scrolled .dropdown a { color: rgba(255, 255, 255, 0.78); }
 .site-header.scrolled .dropdown a:hover { background: rgba(255, 255, 255, 0.06); color: #fff; }
 
-/* Spacer for fixed header — first section accounts for fixed header */
-.site-header + * { padding-top: calc(var(--header-h) + 24px); }
+/* Push content below fixed header — first section overlaps to cover body bg */
+main { margin-top: calc(var(--header-h) + 10px); }
+main > section:first-child { margin-top: calc(-1 * (var(--header-h) + 10px)); padding-top: calc(var(--header-h) + 40px); }
 
 .header-inner {
   display: flex;
