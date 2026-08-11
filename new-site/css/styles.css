@@ -165,21 +165,22 @@ h1, h2, h3, h4 { margin: 0; font-family: var(--font-display); line-height: 1.1; 
   to { transform: translateY(0); opacity: 1; }
 }
 
-/* Default: white full-width bar */
+/* Default: full-width bar, flush to top */
 .site-header {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   z-index: 50;
-  padding: 12px 0;
+  padding: 0;
   animation: headerSlideDown 0.5s var(--ease) both;
+  transition: padding 0.45s var(--ease);
 }
 .site-header .header-inner {
   background: rgba(255, 255, 255, 0.96);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  border: 1px solid var(--line);
+  border: none;
   border-radius: 0;
   height: var(--header-h);
   padding: 0 var(--gutter);
@@ -187,6 +188,9 @@ h1, h2, h3, h4 { margin: 0; font-family: var(--font-display); line-height: 1.1; 
 }
 
 /* Scrolled: floating pill */
+.site-header.scrolled {
+  padding: 14px var(--gutter) 0;
+}
 .site-header.scrolled .header-inner {
   max-width: min(920px, 94vw);
   margin: 0 auto;
@@ -196,7 +200,7 @@ h1, h2, h3, h4 { margin: 0; font-family: var(--font-display); line-height: 1.1; 
   background: rgba(22, 22, 22, 0.88);
   backdrop-filter: blur(20px) saturate(1.4);
   -webkit-backdrop-filter: blur(20px) saturate(1.4);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: none;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
 }
 .site-header.scrolled .brand img { height: 34px; }
@@ -850,20 +854,22 @@ tr:last-child td { border-bottom: 0; }
     background: rgba(255, 255, 255, 0.96);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    border-bottom: none;
+    border: none;
   }
   .site-header .brand img { height: 42px; }
   .site-header .nav-toggle { color: var(--ink); padding: 8px; }
   .site-header .primary-nav a,
   .site-header .drop-toggle { color: var(--ink); }
+  .site-header.scrolled {
+    padding: 10px 14px 0;
+  }
   .site-header.scrolled .header-inner {
     border-radius: 100px;
     height: 50px;
     padding: 0 14px;
-    max-width: calc(100% - 24px);
+    max-width: calc(100% - 28px);
     margin: 0 auto;
     border-bottom: none;
-    background: rgba(255, 255, 255, 0.96);
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
   }
   .site-header.scrolled .brand img { height: 32px; }
