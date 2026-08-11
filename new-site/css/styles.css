@@ -229,6 +229,7 @@ h1, h2, h3, h4 { margin: 0; font-family: var(--font-display); line-height: 1.1; 
 
 .header-cta { margin-left: auto; white-space: nowrap; }
 .site-header.scrolled .header-cta { padding: 10px 20px; font-size: 13px; }
+.nav-cta { display: none; }
 
 .primary-nav ul { list-style: none; display: flex; align-items: center; gap: 4px; }
 .primary-nav a,
@@ -919,6 +920,8 @@ tr:last-child td { border-bottom: 0; }
   .dropdown a:hover { background: none; color: var(--gold); }
   .primary-nav .nav-cta a { width: 100%; text-align: center; justify-content: center; color: var(--white); background: var(--gold-grad); }
   .primary-nav .nav-cta a:hover { color: var(--white); }
+  .nav-cta { display: block !important; }
+  .header-cta { display: none !important; }
 
   .cols-2, .cols-3, .cols-4, .cols-6 { grid-template-columns: 1fr; }
   .stats { grid-template-columns: 1fr 1fr; }
