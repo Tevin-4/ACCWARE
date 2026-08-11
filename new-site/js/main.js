@@ -133,10 +133,12 @@
       '<button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="primary-nav">' +
       '<span class="bar"></span><span class="bar"></span><span class="bar"></span>' +
       "</button>" +
+      '<div class="header-right">' +
       '<nav id="primary-nav" class="primary-nav" aria-label="Main navigation"><ul>' +
       navMarkup() +
       "</ul></nav>" +
       '<a class="header-cta btn btn-gold" href="reach-us.html">Get in Touch</a>' +
+      "</div>" +
       "</div>" +
       "</header>" +
       '<div class="header-spacer"></div>';

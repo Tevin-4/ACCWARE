@@ -230,7 +230,8 @@ h1, h2, h3, h4 { margin: 0; font-family: var(--font-display); line-height: 1.1; 
 .primary-nav a.active { color: var(--gold); }
 
 /* CTA in pill (desktop) */
-.header-cta { margin-left: auto; white-space: nowrap; }
+.header-right { display: flex; align-items: center; gap: 16px; }
+.header-cta { white-space: nowrap; }
 .nav-cta { display: none; }
 
 /* Dropdown */
