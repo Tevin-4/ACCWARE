@@ -331,13 +331,6 @@ h1, h2, h3, h4 { margin: 0; font-family: var(--font-display); line-height: 1.1; 
   padding-block: clamp(40px, 6vw, 80px);
 }
 .hero > * { max-width: 100%; }
-.hero::after {
-  content: "";
-  position: absolute;
-  inset: auto 0 0 0;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(244, 74, 34, 0.7), transparent);
-}
 .hero-grid {
   display: grid;
   grid-template-columns: 1.05fr 0.95fr;
