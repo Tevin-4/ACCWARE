@@ -315,7 +315,7 @@ h1, h2, h3, h4 { margin: 0; font-family: var(--font-display); line-height: 1.1; 
 .site-header.scrolled .dropdown a:hover { background: rgba(255, 255, 255, 0.06); color: #fff; }
 
 /* Push content below fixed header */
-.header-spacer { height: calc(var(--header-h) + 24px); }
+.header-spacer { height: var(--header-h); }
 
 /* ---------- Hero ---------- */
 .hero {
