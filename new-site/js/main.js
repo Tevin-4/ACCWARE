@@ -136,6 +136,7 @@
       '<nav id="primary-nav" class="primary-nav" aria-label="Main navigation"><ul>' +
       navMarkup() +
       "</ul></nav>" +
+      '<a class="header-cta btn btn-gold" href="reach-us.html">Get in Touch</a>' +
       "</div>" +
       "</header>" +
       '<div class="header-spacer"></div>';

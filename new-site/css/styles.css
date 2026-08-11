@@ -188,11 +188,11 @@ h1, h2, h3, h4 { margin: 0; font-family: var(--font-display); line-height: 1.1; 
 
 /* Scrolled: floating pill */
 .site-header.scrolled .header-inner {
-  max-width: min(680px, 92vw);
+  max-width: min(920px, 94vw);
   margin: 0 auto;
   border-radius: 100px;
   height: 56px;
-  padding: 0 24px;
+  padding: 0 20px 0 24px;
   background: rgba(22, 22, 22, 0.88);
   backdrop-filter: blur(20px) saturate(1.4);
   -webkit-backdrop-filter: blur(20px) saturate(1.4);
@@ -200,11 +200,13 @@ h1, h2, h3, h4 { margin: 0; font-family: var(--font-display); line-height: 1.1; 
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
 }
 .site-header.scrolled .brand img { height: 34px; }
+.site-header.scrolled .primary-nav ul { gap: 2px; }
 .site-header.scrolled .primary-nav a,
-.site-header.scrolled .drop-toggle { color: rgba(255, 255, 255, 0.75); }
+.site-header.scrolled .drop-toggle { padding: 8px 10px; font-size: 13.5px; color: rgba(255, 255, 255, 0.75); }
 .site-header.scrolled .primary-nav a:hover,
 .site-header.scrolled .drop-toggle:hover,
 .site-header.scrolled .primary-nav a.active { color: #fff; }
+.site-header.scrolled .nav-cta a { padding: 10px 20px; font-size: 13px; }
 .site-header.scrolled .nav-toggle { color: #fff; }
 .site-header.scrolled .primary-nav a::after { background: var(--gold); }
 .site-header.scrolled .dropdown {
@@ -224,6 +226,9 @@ h1, h2, h3, h4 { margin: 0; font-family: var(--font-display); line-height: 1.1; 
   gap: 20px;
 }
 .brand img { height: 52px; width: auto; transition: height 0.45s var(--ease); }
+
+.header-cta { margin-left: auto; white-space: nowrap; }
+.site-header.scrolled .header-cta { padding: 10px 20px; font-size: 13px; }
 
 .primary-nav ul { list-style: none; display: flex; align-items: center; gap: 4px; }
 .primary-nav a,
@@ -860,6 +865,7 @@ tr:last-child td { border-bottom: 0; }
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
   }
   .site-header.scrolled .brand img { height: 32px; }
+  .site-header.scrolled .header-cta { padding: 8px 16px; font-size: 12.5px; }
   .header-spacer { height: calc(var(--header-h) + 4px); }
 
   .nav-toggle { display: block; }
