@@ -404,10 +404,6 @@ h1, h2, h3, h4 { margin: 0; font-family: var(--font-display); line-height: 1.1; 
   0% { transform: translateX(0); }
   100% { transform: translateX(-50%); }
 }
-@keyframes logoPulse {
-  0%, 100% { opacity: 0.3; filter: grayscale(0.7); }
-  50% { opacity: 1; filter: none; }
-}
 .marquee { border-bottom: 1px solid var(--line); background: var(--white); overflow: hidden; }
 .marquee-label {
   text-align: center;
@@ -422,7 +418,7 @@ h1, h2, h3, h4 { margin: 0; font-family: var(--font-display); line-height: 1.1; 
   display: flex;
   width: max-content;
   padding: 26px 0 32px;
-  animation: marqueeScroll 50s linear infinite;
+  animation: marqueeScroll 40s linear infinite;
 }
 .marquee-viewport:hover { animation-play-state: paused; }
 .marquee-track {
@@ -435,15 +431,8 @@ h1, h2, h3, h4 { margin: 0; font-family: var(--font-display); line-height: 1.1; 
 .marquee-track img {
   height: 44px;
   width: auto;
-  animation: logoPulse 5s ease-in-out infinite;
 }
-.marquee-track img:nth-child(1) { animation-delay: 0s; }
-.marquee-track img:nth-child(2) { animation-delay: 0.7s; }
-.marquee-track img:nth-child(3) { animation-delay: 1.4s; }
-.marquee-track img:nth-child(4) { animation-delay: 2.1s; }
-.marquee-track img:nth-child(5) { animation-delay: 2.8s; }
-.marquee-track img:nth-child(6) { animation-delay: 3.5s; }
-.marquee-track img:nth-child(7) { animation-delay: 4.2s; }
+.marquee-track img:hover { opacity: 0.7; }
 
 /* ---------- Cards ---------- */
 .grid { display: grid; gap: 24px; }
