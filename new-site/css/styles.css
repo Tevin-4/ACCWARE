@@ -414,25 +414,21 @@ h1, h2, h3, h4 { margin: 0; font-family: var(--font-display); line-height: 1.1; 
   color: var(--ink-mid);
   padding: 26px 0 4px;
 }
-.marquee-viewport {
-  display: flex;
-  width: max-content;
-  padding: 26px 0 32px;
-  animation: marqueeScroll 60s linear infinite;
+.marquee-inner {
+  overflow: hidden;
 }
-.marquee-viewport:hover { animation-play-state: paused; }
 .marquee-track {
   display: flex;
   align-items: center;
   gap: clamp(48px, 7vw, 96px);
-  padding-right: clamp(48px, 7vw, 96px);
-  flex-shrink: 0;
+  padding: 26px 0 32px;
+  width: max-content;
+  animation: marqueeScroll 40s linear infinite;
 }
 .marquee-track img {
   height: 44px;
   width: auto;
 }
-.marquee-track img:hover { opacity: 0.7; }
 
 /* ---------- Cards ---------- */
 .grid { display: grid; gap: 24px; }
