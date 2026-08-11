@@ -305,7 +305,6 @@ h1, h2, h3, h4 { margin: 0; font-family: var(--font-display); line-height: 1.1; 
   background-size: 44px 44px, 44px 44px, auto, auto;
   color: var(--white);
   padding-block: clamp(72px, 9vw, 120px);
-  padding-top: calc(var(--header-h) + clamp(32px, 4vw, 48px));
 }
 .hero::after {
   content: "";
