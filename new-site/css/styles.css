@@ -952,8 +952,14 @@ tr:last-child td { border-bottom: 0; }
   }
   .primary-nav a:hover, .drop-toggle:hover { color: var(--gold); }
   .has-dropdown { position: static; }
-  .has-dropdown:hover > .dropdown { display: none; }
-  .has-dropdown.open .dropdown { display: block; padding: 4px 0 8px 14px; border-left: 2px solid var(--gold); }
+  .has-dropdown:hover > .dropdown,
+  .has-dropdown .dropdown {
+    opacity: 0 !important;
+    visibility: hidden !important;
+    transform: none !important;
+    display: none !important;
+  }
+  .has-dropdown.open .dropdown { display: block !important; opacity: 1 !important; visibility: visible !important; padding: 4px 0 8px 14px; border-left: 2px solid var(--gold); }
   .primary-nav .dropdown {
     position: static;
     box-shadow: none;
