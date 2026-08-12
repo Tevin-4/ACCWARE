@@ -20,7 +20,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700;800&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=optional" rel="stylesheet" />
-  <link rel="stylesheet" href="css/styles.min.css?v=10" />
+  <link rel="stylesheet" href="css/styles.min.css?v=11" />
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -399,18 +399,69 @@
     document.addEventListener("DOMContentLoaded", function () {
       var modules = document.querySelectorAll(".erp-module");
       modules.forEach(function (module, index) {
+        var isCentered = module.classList.contains("finance") || module.classList.contains("hr");
+        var base = isCentered ? "translateX(-50%) " : "";
         module.style.opacity = "0";
-        module.style.transform += " scale(0.85)";
+        module.style.transform = base + "scale(0.85)";
         setTimeout(function () {
           module.style.transition = "opacity 700ms ease, transform 700ms ease";
           module.style.opacity = "1";
-          module.style.transform =
-            module.classList.contains("finance") || module.classList.contains("hr")
-              ? "translateX(-50%) scale(1)"
-              : "scale(1)";
+          module.style.transform = base + "scale(1)";
         }, 500 + index * 180);
       });
     });
+
+    /* Draw ERP connection lines from the core ring to each module's inner edge.
+       Uses the SVG screen transform so it stays correct at every viewport / aspect ratio. */
+    (function () {
+      function run() {
+        var svg = document.querySelector(".erp-connections");
+        if (!svg) return;
+        var panel = svg.closest(".erp-animation");
+        var core = panel && panel.querySelector(".erp-core");
+        if (!core) return;
+        var ctm = svg.getScreenCTM();
+        if (!ctm) return;
+        var inv = ctm.inverse();
+        var cr = core.getBoundingClientRect();
+        var ccx = cr.left + cr.width / 2;
+        var ccy = cr.top + cr.height / 2;
+        var ring = svg.querySelector(".ring-outer");
+        var rPx = (ring ? parseFloat(ring.getAttribute("r")) : 105) * ctm.a;
+        var modules = panel.querySelectorAll(".erp-module");
+        var paths = svg.querySelectorAll(".connection");
+        var particles = svg.querySelectorAll(".data-particle animateMotion");
+        modules.forEach(function (m, i) {
+          var r = m.getBoundingClientRect();
+          var mcx = r.left + r.width / 2;
+          var mcy = r.top + r.height / 2;
+          var dx = mcx - ccx, dy = mcy - ccy;
+          var dlen = Math.hypot(dx, dy) || 1;
+          dx /= dlen; dy /= dlen;
+          var rx = ccx + dx * rPx, ry = ccy + dy * rPx;
+          var ex, ey;
+          if (mcx < ccx - 5) { ex = r.right; ey = mcy; }
+          else if (mcx > ccx + 5) { ex = r.left; ey = mcy; }
+          else { ex = mcx; ey = (mcy < ccy) ? r.bottom : r.top; }
+          function toUser(px, py) {
+            var pt = svg.createSVGPoint();
+            pt.x = px; pt.y = py;
+            return pt.matrixTransform(inv);
+          }
+          var R = toUser(rx, ry), E = toUser(ex, ey);
+          var dd = "M" + R.x.toFixed(1) + " " + R.y.toFixed(1) + " L" + E.x.toFixed(1) + " " + E.y.toFixed(1);
+          if (paths[i]) paths[i].setAttribute("d", dd);
+          if (particles[i]) particles[i].setAttribute("path", dd);
+        });
+      }
+      if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", run);
+      else run();
+      window.addEventListener("load", run);
+      window.addEventListener("resize", run);
+      setTimeout(run, 300);
+      setTimeout(run, 1200);
+      setTimeout(run, 2200);
+    })();
   </script>
 </body>
 </html>
