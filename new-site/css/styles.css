@@ -440,8 +440,8 @@ h1, h2, h3, h4 { margin: 0; font-family: var(--font-display); line-height: 1.1; 
 .hero > * { max-width: 100%; }
 .hero-grid {
   display: grid;
-  grid-template-columns: 0.78fr 1.22fr;
-  gap: clamp(40px, 5vw, 72px);
+  grid-template-columns: 0.82fr 1.18fr;
+  gap: clamp(56px, 6vw, 104px);
   align-items: start;
 }
 .hero-title {
