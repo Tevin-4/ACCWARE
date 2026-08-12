@@ -345,4 +345,11 @@
   initVideos();
   initCounters();
   initContactForm();
+
+  // Pause SMIL particle motion for users who prefer reduced motion
+  if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    document.querySelectorAll(".erp-connections").forEach(function (svg) {
+      if (svg.pauseAnimations) svg.pauseAnimations();
+    });
+  }
 })();

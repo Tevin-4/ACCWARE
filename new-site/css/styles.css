@@ -459,51 +459,209 @@ h1, h2, h3, h4 { margin: 0; font-family: var(--font-display); line-height: 1.1; 
 .trust-item img { height: 34px; width: auto; }
 .trust-item strong { color: var(--gold-soft); font-weight: 500; }
 
-/* Bridge drawing panel */
-.bridge-panel {
+/* ERP animation panel (replaces static bridge) */
+.erp-animation {
   position: relative;
+  width: 100%;
+  aspect-ratio: 700 / 520;
   background: rgba(10, 26, 36, 0.55);
   border: 1px solid rgba(255, 255, 255, 0.14);
   border-radius: 6px;
-  padding: clamp(18px, 3vw, 30px);
+  padding: clamp(16px, 2.4vw, 26px);
+  overflow: hidden;
 }
-.bridge-panel .frame-label {
+.erp-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 32px 32px;
+  pointer-events: none;
+}
+.tech-label {
+  position: absolute;
+  top: 16px;
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: clamp(8px, 1.1vw, 10.5px);
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--gold);
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 10px;
+  color: rgba(246, 243, 236, 0.5);
 }
-.bridge-panel .frame-label span:last-child { color: rgba(246, 243, 236, 0.4); }
-.bridge-svg { width: 100%; height: auto; }
-.bridge-svg .s-stroke { fill: none; stroke: rgba(246, 243, 236, 0.85); stroke-width: 1.5; }
-.bridge-svg .s-cable { fill: none; stroke: var(--gold); stroke-width: 2; }
-.bridge-svg .s-tower { fill: none; stroke: var(--gold-soft); stroke-width: 2.5; }
-.bridge-svg .s-water { fill: none; stroke: rgba(246, 243, 236, 0.35); stroke-width: 1; }
-.bridge-svg .s-grid { fill: none; stroke: rgba(246, 243, 236, 0.08); stroke-width: 1; }
+.tech-label.top-left { left: 18px; }
+.tech-label.top-right { right: 18px; color: rgba(244, 74, 34, 0.85); }
 
-/* Floating chips over the bridge */
-.float-chip {
+/* SVG layer */
+.erp-connections {
   position: absolute;
-  background: var(--white);
-  color: var(--ink);
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.erp-connections .connection {
+  fill: none;
+  stroke: rgba(244, 74, 34, 0.4);
+  stroke-width: 1.5;
+  stroke-dasharray: 4 6;
+  animation: connFlow 3s linear infinite;
+}
+@keyframes connFlow { to { stroke-dashoffset: -20; } }
+.data-particle { fill: var(--gold); filter: drop-shadow(0 0 4px rgba(244, 74, 34, 0.8)); }
+
+.core-ring { fill: none; stroke: rgba(244, 74, 34, 0.5); stroke-width: 1.5; }
+.ring-outer { opacity: 0.28; }
+.ring-middle { opacity: 0.5; }
+.ring-inner { opacity: 0.72; }
+
+/* Central core */
+.erp-core {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  display: grid;
+  place-items: center;
+  text-align: center;
+  z-index: 3;
+}
+.accware-mark {
+  width: clamp(46px, 6vw, 64px);
+  height: clamp(46px, 6vw, 64px);
+  border-radius: 50%;
+  background: var(--gold-grad);
+  display: grid;
+  place-items: center;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(22px, 3vw, 32px);
+  color: #fff;
+  margin: 0 auto 8px;
+  position: relative;
+  z-index: 1;
+}
+.core-pulse {
+  position: absolute;
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background: rgba(244, 74, 34, 0.25);
+  animation: corePulse 2.6s ease-out infinite;
+}
+@keyframes corePulse {
+  0% { transform: scale(0.7); opacity: 0.7; }
+  100% { transform: scale(1.9); opacity: 0; }
+}
+.core-name {
+  font-family: var(--font-display);
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  font-size: clamp(14px, 2vw, 18px);
+  color: #fff;
+}
+.core-title {
   font-family: var(--font-mono);
-  font-size: 12px;
-  letter-spacing: 0.06em;
-  padding: 9px 13px;
+  color: var(--gold-soft);
+  font-size: clamp(10px, 1.3vw, 12px);
+  letter-spacing: 0.32em;
+  margin-top: 2px;
+}
+.core-description {
+  font-family: var(--font-mono);
+  font-size: clamp(8px, 1.1vw, 9.5px);
+  letter-spacing: 0.14em;
+  color: rgba(246, 243, 236, 0.55);
+  margin-top: 10px;
+}
+
+/* Module cards */
+.erp-module {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  background: rgba(10, 26, 36, 0.78);
+  border: 1px solid rgba(255, 255, 255, 0.16);
   border-radius: var(--radius);
-  box-shadow: var(--shadow);
+  padding: 8px 11px;
+  z-index: 2;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  white-space: nowrap;
+}
+.erp-module .module-icon {
+  width: clamp(24px, 3vw, 30px);
+  height: clamp(24px, 3vw, 30px);
+  display: grid;
+  place-items: center;
+  border-radius: 6px;
+  background: var(--gold-grad);
+  color: #fff;
+  font-size: clamp(12px, 1.6vw, 15px);
+}
+.erp-module strong {
+  font-family: var(--font-display);
+  font-size: clamp(10px, 1.3vw, 12px);
+  letter-spacing: 0.05em;
+  display: block;
+  color: #fff;
+}
+.erp-module small {
+  font-family: var(--font-mono);
+  font-size: clamp(8px, 1.1vw, 9.5px);
+  color: rgba(246, 243, 236, 0.6);
+  letter-spacing: 0.03em;
+}
+.erp-module.finance { left: 22.86%; top: 27.88%; }
+.erp-module.sales { left: 50%; top: 19.23%; }
+.erp-module.inventory { left: 77.14%; top: 27.88%; }
+.erp-module.crm { left: 81.43%; top: 50%; }
+.erp-module.operations { left: 76.43%; top: 72.12%; }
+.erp-module.projects { left: 50%; top: 80.77%; }
+.erp-module.analytics { left: 22.86%; top: 72.12%; }
+.erp-module.hr { left: 18.57%; top: 50%; }
+
+/* System status bar */
+.system-status {
+  position: absolute;
+  left: 50%;
+  bottom: 10px;
+  transform: translateX(-50%);
   display: flex;
   align-items: center;
   gap: 8px;
+  font-family: var(--font-mono);
+  font-size: clamp(8px, 1.1vw, 10px);
+  letter-spacing: 0.14em;
+  color: rgba(246, 243, 236, 0.6);
+  z-index: 4;
 }
-.float-chip strong { font-family: var(--font-display); font-size: 15px; color: var(--navy); }
-.float-chip .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--gold); }
-.chip-a { top: 22%; left: 2%; }
-.chip-b { bottom: 16%; right: 2%; }
+.system-status .status-label { color: rgba(246, 243, 236, 0.4); }
+.status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #3ddc84;
+  box-shadow: 0 0 8px #3ddc84;
+  animation: statusBlink 2.2s infinite;
+}
+@keyframes statusBlink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+
+@media (max-width: 760px) {
+  .erp-animation { max-width: 460px; margin-inline: auto; }
+  .erp-module { padding: 6px 9px; gap: 6px; }
+  .erp-module small { display: none; }
+  .erp-module .module-icon { width: 26px; height: 26px; font-size: 13px; }
+  .erp-module strong { font-size: 10px; }
+  /* pull side modules inward so cards fit the narrow panel */
+  .erp-module.finance { left: 26%; }
+  .erp-module.inventory { left: 74%; }
+  .erp-module.crm { left: 78%; }
+  .erp-module.hr { left: 22%; }
+  .erp-module.operations { left: 74%; }
+  .erp-module.analytics { left: 26%; }
+  .system-status { bottom: 6px; }
+}
 
 /* ---------- Logo marquee ---------- */
 @keyframes marqueeScroll {
@@ -934,7 +1092,7 @@ tr:last-child td { border-bottom: 0; }
   .hero-grid, .split, .contact-grid { grid-template-columns: 1fr; }
   .hero { padding-block: clamp(24px, 5vw, 48px); }
   .hero-title { font-size: clamp(1.8rem, 7vw, 2.6rem); }
-  .bridge-panel { order: -1; }
+  .erp-animation { order: -1; }
   .chip-a { left: 2%; }
   .chip-b { right: 2%; }
 }
