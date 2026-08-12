@@ -681,14 +681,14 @@ h1, h2, h3, h4 { margin: 0; font-family: var(--font-display); line-height: 1.1; 
   .erp-module small { font-size: 7px; }
   .module-icon { font-size: 14px; width: 16px; }
   .core-rotator { font-size: 12px; }
-  .finance { top: 50px; }
-  .sales { left: 3%; top: 115px; }
-  .inventory { right: 3%; top: 115px; }
-  .crm { left: 1%; top: 225px; }
-  .operations { right: 1%; top: 225px; }
-  .projects { left: 4%; bottom: 80px; }
-  .analytics { right: 4%; bottom: 80px; }
-  .hr { bottom: 35px; }
+  .finance { top: 3%; }
+  .sales { left: 2%; top: 19%; }
+  .inventory { right: 2%; top: 19%; }
+  .crm { left: 0; top: 45%; }
+  .operations { right: 0; top: 45%; }
+  .projects { left: 2%; bottom: 24%; }
+  .analytics { right: 2%; bottom: 24%; }
+  .hr { bottom: 2%; }
   .system-status { font-size: 6px; }
 }
 
