@@ -465,7 +465,7 @@ h1, h2, h3, h4 { margin: 0; font-family: var(--font-display); line-height: 1.1; 
   width: 100%;
   max-width: 880px;
   aspect-ratio: 700 / 520;
-  margin-top: 38px;
+  margin-top: 10px;
 }
 
 /* TECH GRID */
