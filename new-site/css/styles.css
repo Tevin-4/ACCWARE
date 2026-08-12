@@ -848,6 +848,7 @@ tr:last-child td { border-bottom: 0; }
     border-radius: 0;
   }
   .brand img { height: 42px; }
+  .brand { flex: 1; }
   .nav-toggle { display: block; color: var(--ink); padding: 8px; }
   .primary-nav a, .drop-toggle { color: var(--ink); }
   .site-header.scrolled .primary-nav a,
