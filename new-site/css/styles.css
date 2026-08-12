@@ -465,7 +465,7 @@ h1, h2, h3, h4 { margin: 0; font-family: var(--font-display); line-height: 1.1; 
   width: 100%;
   max-width: 880px;
   aspect-ratio: 700 / 520;
-  margin-top: 10px;
+  margin-top: -24px;
 }
 
 /* TECH GRID */
@@ -577,36 +577,15 @@ h1, h2, h3, h4 { margin: 0; font-family: var(--font-display); line-height: 1.1; 
   0%, 100% { box-shadow: 0 0 25px rgba(255, 91, 35, 0.12), inset 0 0 25px rgba(255, 91, 35, 0.04); }
   50% { box-shadow: 0 0 45px rgba(255, 91, 35, 0.25), inset 0 0 35px rgba(255, 91, 35, 0.08); }
 }
-.accware-mark {
-  width: 25px;
-  height: 25px;
-  margin-bottom: 3px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #ff642d;
-  font-size: 25px;
-  font-weight: 800;
-}
-.core-name {
+.core-rotator {
   color: #ff642d;
   font-size: 15px;
   font-weight: 800;
-  letter-spacing: 1px;
-}
-.core-title {
-  color: white;
-  font-size: 17px;
-  font-weight: 600;
-  letter-spacing: 1px;
-}
-.core-description {
-  margin-top: 8px;
-  color: rgba(220, 235, 240, 0.55);
-  font-family: monospace;
-  font-size: 6px;
-  letter-spacing: 0.8px;
+  letter-spacing: 0.5px;
   text-align: center;
+  line-height: 1.15;
+  padding: 0 8px;
+  transition: opacity 0.45s ease;
 }
 
 /* MODULE CARDS */
@@ -628,14 +607,15 @@ h1, h2, h3, h4 { margin: 0; font-family: var(--font-display); line-height: 1.1; 
 .erp-module strong {
   display: block;
   color: #f4f7f8;
-  font-size: 10px;
+  font-size: 11px;
   letter-spacing: 0.8px;
 }
 .erp-module small {
   display: block;
   margin-top: 3px;
-  color: rgba(210, 225, 232, 0.55);
-  font-size: 7px;
+  color: rgba(223, 237, 244, 0.85);
+  font-size: 9px;
+  font-weight: 500;
 }
 .module-icon {
   color: #ff642d;
@@ -695,22 +675,20 @@ h1, h2, h3, h4 { margin: 0; font-family: var(--font-display); line-height: 1.1; 
 
 /* MOBILE */
 @media (max-width: 768px) {
-  .erp-animation { max-width: 100%; aspect-ratio: 1 / 1; }
-  .erp-module { min-width: 90px; padding: 7px; gap: 5px; }
-  .erp-module strong { font-size: 7px; }
-  .erp-module small { font-size: 5px; }
-  .module-icon { font-size: 14px; width: 16px; }
-  .core-name { font-size: 12px; }
-  .core-title { font-size: 14px; }
-  .core-description { font-size: 5px; }
-  .finance { top: 50px; }
-  .sales { left: 3%; top: 115px; }
-  .inventory { right: 3%; top: 115px; }
-  .crm { left: 1%; top: 225px; }
-  .operations { right: 1%; top: 225px; }
-  .projects { left: 4%; bottom: 80px; }
-  .analytics { right: 4%; bottom: 80px; }
-  .hr { bottom: 35px; }
+  .erp-animation { max-width: 100%; aspect-ratio: 1 / 1; margin-top: 0; }
+  .erp-module { min-width: 72px; padding: 6px 9px; gap: 6px; }
+  .erp-module strong { font-size: 8px; }
+  .erp-module small { display: none; }
+  .module-icon { font-size: 13px; width: 15px; }
+  .core-rotator { font-size: 12px; }
+  .finance { top: 3%; }
+  .sales { left: 2%; top: 19%; }
+  .inventory { right: 2%; top: 19%; }
+  .crm { left: 0; top: 45%; }
+  .operations { right: 0; top: 45%; }
+  .projects { left: 2%; bottom: 24%; }
+  .analytics { right: 2%; bottom: 24%; }
+  .hr { bottom: 2%; }
   .system-status { font-size: 6px; }
 }
 

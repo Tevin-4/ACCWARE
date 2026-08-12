@@ -337,6 +337,52 @@
     });
   }
 
+  function addJSONLD(obj) {
+    var s = document.createElement("script");
+    s.type = "application/ld+json";
+    s.textContent = JSON.stringify(obj);
+    document.head.appendChild(s);
+  }
+
+  function injectSEO() {
+    var head = document.head;
+    if (!head) return;
+    if (!document.querySelector('meta[name="theme-color"]')) {
+      var tc = document.createElement("meta");
+      tc.name = "theme-color";
+      tc.content = "#161616";
+      head.appendChild(tc);
+    }
+    function hasType(t) {
+      return [].some.call(document.querySelectorAll('script[type="application/ld+json"]'), function (s) {
+        try { return (JSON.parse(s.textContent)["@type"] || "") === t; } catch (e) { return false; }
+      });
+    }
+    if (!hasType("Organization")) {
+      addJSONLD({
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "Accware Solutions",
+        "url": "https://accware.ug",
+        "logo": "https://accware.ug/assets/logos/accware-logo.png",
+        "description": "Acumatica Gold Partner delivering modern cloud ERP and integrated business management solutions for growing businesses across East Africa and the Middle East.",
+        "foundingDate": "2012",
+        "address": { "@type": "PostalAddress", "addressLocality": "Kampala", "addressCountry": "UG" },
+        "contactPoint": { "@type": "ContactPoint", "telephone": "+256-705-969313", "contactType": "sales", "email": "info@accware.ug", "areaServed": ["UG", "KE", "TZ", "AE"], "availableLanguage": ["en"] },
+        "sameAs": ["https://www.linkedin.com/company/accware-solutions/"]
+      });
+    }
+    if (!hasType("WebSite")) {
+      addJSONLD({
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Accware Solutions",
+        "url": "https://accware.ug"
+      });
+    }
+  }
+
+  injectSEO();
   renderHeader();
   renderFooter();
   initNav();
