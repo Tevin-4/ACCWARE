@@ -659,14 +659,14 @@ h1, h2, h3, h4 { margin: 0; font-family: var(--font-display); line-height: 1.1; 
 }
 
 /* MODULE POSITIONS */
-.finance { top: 55px; left: 50%; transform: translateX(-50%); animation: moduleFloatCenter 4s ease-in-out infinite; }
-.sales { top: 125px; left: 8%; }
-.inventory { top: 125px; right: 8%; }
-.crm { top: 235px; left: 4%; }
-.operations { top: 235px; right: 4%; }
-.projects { bottom: 75px; left: 10%; }
-.analytics { bottom: 75px; right: 10%; }
-.hr { bottom: 18px; left: 50%; transform: translateX(-50%); animation: moduleFloatCenter 4s ease-in-out infinite; }
+.finance { top: 12%; left: 50%; transform: translateX(-50%); animation: moduleFloatCenter 4s ease-in-out infinite; }
+.sales { top: 28%; left: 8%; }
+.inventory { top: 28%; right: 8%; }
+.crm { top: 46%; left: 4%; }
+.operations { top: 46%; right: 4%; }
+.projects { top: 64%; left: 10%; }
+.analytics { top: 64%; right: 10%; }
+.hr { top: 82%; left: 50%; transform: translateX(-50%); animation: moduleFloatCenter 4s ease-in-out infinite; }
 
 /* SYSTEM STATUS */
 .system-status {
