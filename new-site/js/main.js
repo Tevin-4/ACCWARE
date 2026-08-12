@@ -271,6 +271,8 @@
             var v = m.querySelector("video");
             if (v && v !== video) { v.pause(); m.classList.remove("playing"); }
           });
+          video.muted = false;
+          video.volume = 1;
           video.play();
           media.classList.add("playing");
         } else {
