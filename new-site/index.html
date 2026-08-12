@@ -20,7 +20,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700;800&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=optional" rel="stylesheet" />
-  <link rel="stylesheet" href="css/styles.min.css?v=9" />
+  <link rel="stylesheet" href="css/styles.min.css?v=10" />
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -397,5 +397,22 @@
   <div id="site-footer"></div>
 
   <script src="js/main.min.js?v=2"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      var modules = document.querySelectorAll(".erp-module");
+      modules.forEach(function (module, index) {
+        module.style.opacity = "0";
+        module.style.transform += " scale(0.85)";
+        setTimeout(function () {
+          module.style.transition = "opacity 700ms ease, transform 700ms ease";
+          module.style.opacity = "1";
+          module.style.transform =
+            module.classList.contains("finance") || module.classList.contains("hr")
+              ? "translateX(-50%) scale(1)"
+              : "scale(1)";
+        }, 500 + index * 180);
+      });
+    });
+  </script>
 </body>
 </html>
