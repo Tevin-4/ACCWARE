@@ -440,8 +440,8 @@ h1, h2, h3, h4 { margin: 0; font-family: var(--font-display); line-height: 1.1; 
 .hero > * { max-width: 100%; }
 .hero-grid {
   display: grid;
-  grid-template-columns: 0.82fr 1.18fr;
-  gap: clamp(56px, 6vw, 104px);
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: clamp(32px, 4vw, 64px);
   align-items: start;
 }
 .hero-title {
@@ -472,6 +472,7 @@ h1, h2, h3, h4 { margin: 0; font-family: var(--font-display); line-height: 1.1; 
   border: 1px solid rgba(150, 190, 215, 0.35);
   border-radius: 10px;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35), inset 0 0 60px rgba(20, 100, 150, 0.05);
+  margin-top: 38px;
 }
 
 /* TECH GRID */
@@ -1149,7 +1150,7 @@ tr:last-child td { border-bottom: 0; }
   .hero-grid, .split, .contact-grid { grid-template-columns: 1fr; }
   .hero { padding-block: clamp(24px, 5vw, 48px); }
   .hero-title { font-size: clamp(1.8rem, 7vw, 2.6rem); }
-  .erp-animation { order: -1; }
+  .erp-animation { order: -1; margin-top: 0; }
   .chip-a { left: 2%; }
   .chip-b { right: 2%; }
 }
