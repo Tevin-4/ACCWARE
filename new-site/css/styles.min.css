@@ -465,13 +465,6 @@ h1, h2, h3, h4 { margin: 0; font-family: var(--font-display); line-height: 1.1; 
   width: 100%;
   max-width: 880px;
   aspect-ratio: 700 / 520;
-  overflow: hidden;
-  background:
-    radial-gradient(circle at center, rgba(255, 90, 30, 0.08), transparent 42%),
-    #07121d;
-  border: 1px solid rgba(150, 190, 215, 0.35);
-  border-radius: 10px;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35), inset 0 0 60px rgba(20, 100, 150, 0.05);
   margin-top: 38px;
 }
 
