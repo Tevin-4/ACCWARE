@@ -577,17 +577,15 @@ h1, h2, h3, h4 { margin: 0; font-family: var(--font-display); line-height: 1.1; 
   0%, 100% { box-shadow: 0 0 25px rgba(255, 91, 35, 0.12), inset 0 0 25px rgba(255, 91, 35, 0.04); }
   50% { box-shadow: 0 0 45px rgba(255, 91, 35, 0.25), inset 0 0 35px rgba(255, 91, 35, 0.08); }
 }
-.core-name {
+.core-rotator {
   color: #ff642d;
   font-size: 15px;
   font-weight: 800;
-  letter-spacing: 1px;
-}
-.core-title {
-  color: white;
-  font-size: 13px;
-  font-weight: 600;
   letter-spacing: 0.5px;
+  text-align: center;
+  line-height: 1.15;
+  padding: 0 8px;
+  transition: opacity 0.45s ease;
 }
 
 /* MODULE CARDS */
@@ -609,14 +607,15 @@ h1, h2, h3, h4 { margin: 0; font-family: var(--font-display); line-height: 1.1; 
 .erp-module strong {
   display: block;
   color: #f4f7f8;
-  font-size: 10px;
+  font-size: 11px;
   letter-spacing: 0.8px;
 }
 .erp-module small {
   display: block;
   margin-top: 3px;
-  color: rgba(210, 225, 232, 0.55);
-  font-size: 7px;
+  color: rgba(223, 237, 244, 0.85);
+  font-size: 9px;
+  font-weight: 500;
 }
 .module-icon {
   color: #ff642d;
@@ -679,10 +678,9 @@ h1, h2, h3, h4 { margin: 0; font-family: var(--font-display); line-height: 1.1; 
   .erp-animation { max-width: 100%; aspect-ratio: 1 / 1; margin-top: 0; }
   .erp-module { min-width: 90px; padding: 7px; gap: 5px; }
   .erp-module strong { font-size: 7px; }
-  .erp-module small { font-size: 5px; }
+  .erp-module small { font-size: 7px; }
   .module-icon { font-size: 14px; width: 16px; }
-  .core-name { font-size: 12px; }
-  .core-title { font-size: 11px; letter-spacing: 0.3px; }
+  .core-rotator { font-size: 12px; }
   .finance { top: 50px; }
   .sales { left: 3%; top: 115px; }
   .inventory { right: 3%; top: 115px; }

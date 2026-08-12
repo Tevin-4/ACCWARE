@@ -20,7 +20,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700;800&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=optional" rel="stylesheet" />
-  <link rel="stylesheet" href="css/styles.min.css?v=19" />
+  <link rel="stylesheet" href="css/styles.min.css?v=20" />
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -119,8 +119,7 @@
           <!-- Central ERP -->
           <div class="erp-core">
             <div class="core-pulse"></div>
-            <div class="core-name">ACCWARE</div>
-            <div class="core-title">SOLUTIONS</div>
+            <div class="core-rotator" id="coreRotator">Integrate</div>
           </div>
 
           <!-- Module cards -->
@@ -447,6 +446,22 @@
       setTimeout(run, 300);
       setTimeout(run, 1200);
       setTimeout(run, 2200);
+    })();
+
+    /* Cycle the core text through a series of phrases with a fade transition. */
+    (function () {
+      var el = document.getElementById("coreRotator");
+      if (!el) return;
+      var phrases = ["Integrate", "Connect", "All In One Place"];
+      var i = 0;
+      setInterval(function () {
+        el.style.opacity = "0";
+        setTimeout(function () {
+          i = (i + 1) % phrases.length;
+          el.textContent = phrases[i];
+          el.style.opacity = "1";
+        }, 450);
+      }, 2200);
     })();
   </script>
 </body>
