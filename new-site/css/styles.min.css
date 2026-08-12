@@ -435,12 +435,12 @@ h1, h2, h3, h4 { margin: 0; font-family: var(--font-display); line-height: 1.1; 
     linear-gradient(160deg, var(--ink) 0%, var(--navy-2) 130%);
   background-size: 44px 44px, 44px 44px, auto, auto;
   color: var(--white);
-  padding-block: clamp(40px, 6vw, 80px);
+  padding-block: clamp(60px, 8vw, 110px);
 }
 .hero > * { max-width: 100%; }
 .hero-grid {
   display: grid;
-  grid-template-columns: 1.05fr 0.95fr;
+  grid-template-columns: 0.9fr 1.1fr;
   gap: clamp(32px, 4vw, 64px);
   align-items: start;
 }
