@@ -465,7 +465,7 @@ h1, h2, h3, h4 { margin: 0; font-family: var(--font-display); line-height: 1.1; 
   width: 100%;
   max-width: 880px;
   aspect-ratio: 700 / 520;
-  margin-top: 10px;
+  margin-top: -24px;
 }
 
 /* TECH GRID */
@@ -577,17 +577,6 @@ h1, h2, h3, h4 { margin: 0; font-family: var(--font-display); line-height: 1.1; 
   0%, 100% { box-shadow: 0 0 25px rgba(255, 91, 35, 0.12), inset 0 0 25px rgba(255, 91, 35, 0.04); }
   50% { box-shadow: 0 0 45px rgba(255, 91, 35, 0.25), inset 0 0 35px rgba(255, 91, 35, 0.08); }
 }
-.accware-mark {
-  width: 25px;
-  height: 25px;
-  margin-bottom: 3px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #ff642d;
-  font-size: 25px;
-  font-weight: 800;
-}
 .core-name {
   color: #ff642d;
   font-size: 15px;
@@ -596,17 +585,9 @@ h1, h2, h3, h4 { margin: 0; font-family: var(--font-display); line-height: 1.1; 
 }
 .core-title {
   color: white;
-  font-size: 17px;
+  font-size: 16px;
   font-weight: 600;
-  letter-spacing: 1px;
-}
-.core-description {
-  margin-top: 8px;
-  color: rgba(220, 235, 240, 0.55);
-  font-family: monospace;
-  font-size: 6px;
-  letter-spacing: 0.8px;
-  text-align: center;
+  letter-spacing: 0.5px;
 }
 
 /* MODULE CARDS */
@@ -695,14 +676,13 @@ h1, h2, h3, h4 { margin: 0; font-family: var(--font-display); line-height: 1.1; 
 
 /* MOBILE */
 @media (max-width: 768px) {
-  .erp-animation { max-width: 100%; aspect-ratio: 1 / 1; }
+  .erp-animation { max-width: 100%; aspect-ratio: 1 / 1; margin-top: 0; }
   .erp-module { min-width: 90px; padding: 7px; gap: 5px; }
   .erp-module strong { font-size: 7px; }
   .erp-module small { font-size: 5px; }
   .module-icon { font-size: 14px; width: 16px; }
   .core-name { font-size: 12px; }
-  .core-title { font-size: 14px; }
-  .core-description { font-size: 5px; }
+  .core-title { font-size: 11px; letter-spacing: 0.3px; }
   .finance { top: 50px; }
   .sales { left: 3%; top: 115px; }
   .inventory { right: 3%; top: 115px; }
