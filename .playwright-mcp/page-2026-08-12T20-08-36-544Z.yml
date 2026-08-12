@@ -1,0 +1,368 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e3]:
+      - link "Accware Solutions — home" [ref=e4] [cursor=pointer]:
+        - /url: index.html
+        - img "Accware Solutions" [ref=e5]
+      - generic [ref=e6]:
+        - navigation "Main navigation" [ref=e7]:
+          - list [ref=e8]:
+            - listitem [ref=e9]:
+              - link "Home" [ref=e10] [cursor=pointer]:
+                - /url: index.html
+            - listitem [ref=e11]:
+              - link "Products" [ref=e12] [cursor=pointer]:
+                - /url: products.html
+            - listitem [ref=e13]:
+              - link "Services" [ref=e14] [cursor=pointer]:
+                - /url: services.html
+            - listitem [ref=e15]:
+              - button "Solutions" [ref=e16] [cursor=pointer]
+            - listitem [ref=e17]:
+              - link "Resources" [ref=e18] [cursor=pointer]:
+                - /url: resources.html
+            - listitem [ref=e19]:
+              - link "About" [ref=e20] [cursor=pointer]:
+                - /url: about.html
+            - listitem [ref=e21]:
+              - link "Blog" [ref=e22] [cursor=pointer]:
+                - /url: blog.html
+        - link "Get in Touch" [ref=e23] [cursor=pointer]:
+          - /url: reach-us.html
+  - main [ref=e25]:
+    - generic [ref=e27]:
+      - generic [ref=e28]:
+        - paragraph [ref=e29]: ERP Software Solutions · Kampala, Uganda
+        - heading "Your bridge to productive ERP solutions" [level=1] [ref=e30]
+        - paragraph [ref=e31]: Accware delivers modern, cloud ERP software for the growing needs of business — implemented by certified consultants across East Africa and the Middle East.
+        - generic [ref=e32]:
+          - link "Explore Products →" [ref=e33] [cursor=pointer]:
+            - /url: products.html
+            - text: Explore Products
+            - generic [ref=e34]: →
+          - link "Talk to an Expert" [ref=e35] [cursor=pointer]:
+            - /url: reach-us.html
+        - generic [ref=e36]:
+          - generic [ref=e37]:
+            - img "Gold Certification" [ref=e39]
+            - strong [ref=e40]: Gold Certified
+            - text: Acumatica Partner
+          - generic [ref=e41]:
+            - img "Microsoft Partner" [ref=e43]
+            - strong [ref=e44]: Microsoft
+            - text: Partner
+      - generic [ref=e45]:
+        - generic [ref=e64]: Integrate
+        - generic [ref=e66]:
+          - generic [ref=e67]: ▥
+          - generic [ref=e68]:
+            - strong [ref=e69]: FINANCE
+            - generic [ref=e70]: Real-time visibility
+        - generic [ref=e71]:
+          - generic [ref=e72]: ⌁
+          - generic [ref=e73]:
+            - strong [ref=e74]: SALES
+            - generic [ref=e75]: Orders & customers
+        - generic [ref=e76]:
+          - generic [ref=e77]: ◇
+          - generic [ref=e78]:
+            - strong [ref=e79]: INVENTORY
+            - generic [ref=e80]: Stock in real time
+        - generic [ref=e81]:
+          - generic [ref=e82]: ♧
+          - generic [ref=e83]:
+            - strong [ref=e84]: CRM
+            - generic [ref=e85]: Customer relationships
+        - generic [ref=e86]:
+          - generic [ref=e87]: ⚙
+          - generic [ref=e88]:
+            - strong [ref=e89]: OPERATIONS
+            - generic [ref=e90]: Workflows & processes
+        - generic [ref=e91]:
+          - generic [ref=e92]: □
+          - generic [ref=e93]:
+            - strong [ref=e94]: PROJECTS
+            - generic [ref=e95]: Plan & deliver
+        - generic [ref=e96]:
+          - generic [ref=e97]: ◔
+          - generic [ref=e98]:
+            - strong [ref=e99]: ANALYTICS
+            - generic [ref=e100]: Business intelligence
+        - generic [ref=e101]:
+          - generic [ref=e102]: ♙
+          - generic [ref=e103]:
+            - strong [ref=e104]: HR
+            - generic [ref=e105]: People & performance
+    - generic [ref=e106]:
+      - paragraph [ref=e107]: Products we deliver & integrate
+      - generic [ref=e109]:
+        - img "Acumatica Cloud ERP" [ref=e110]
+        - img "Microsoft Dynamics" [ref=e111]
+        - img "Payspace Payroll" [ref=e112]
+        - img "Microsoft 365" [ref=e113]
+        - img "Microsoft Power Apps" [ref=e114]
+        - img "Microsoft Azure" [ref=e115]
+        - img "Amazon Web Services" [ref=e116]
+        - img "Acumatica Cloud ERP" [ref=e117]
+        - img "Microsoft Dynamics" [ref=e118]
+        - img "Payspace Payroll" [ref=e119]
+        - img "Microsoft 365" [ref=e120]
+        - img "Microsoft Power Apps" [ref=e121]
+        - img "Microsoft Azure" [ref=e122]
+        - img "Amazon Web Services" [ref=e123]
+    - generic [ref=e125]:
+      - generic [ref=e126]:
+        - generic [ref=e127]:
+          - paragraph [ref=e128]: Industry Solutions
+          - heading "One connected platform, built for your industry" [level=2] [ref=e129]: One connected platform,built for your industry
+        - link "View all industries →" [ref=e130] [cursor=pointer]:
+          - /url: industry.html
+          - text: View all industries
+          - generic [ref=e131]: →
+      - generic [ref=e132]:
+        - article [ref=e133]:
+          - button "Play video" [ref=e136] [cursor=pointer]
+          - generic [ref=e139]:
+            - heading "General Business" [level=3] [ref=e140]
+            - paragraph [ref=e141]: Advanced financial management, project accounting and CRM for service and non-profit organisations.
+            - link "Explore →" [ref=e142] [cursor=pointer]:
+              - /url: industry.html#general-business
+        - article [ref=e143]:
+          - button "Play video" [ref=e146] [cursor=pointer]
+          - generic [ref=e149]:
+            - heading "Distribution & Logistics" [level=3] [ref=e150]
+            - paragraph [ref=e151]: Sales, inventory, purchasing and warehouse management with embedded WMS and replenishment logic.
+            - link "Explore →" [ref=e152] [cursor=pointer]:
+              - /url: industry.html#distribution
+        - article [ref=e153]:
+          - button "Play video" [ref=e156] [cursor=pointer]
+          - generic [ref=e159]:
+            - heading "Manufacturing" [level=3] [ref=e160]
+            - paragraph [ref=e161]: Production, estimating, planning and scheduling — from BOM and routing to the shop floor.
+            - link "Explore →" [ref=e162] [cursor=pointer]:
+              - /url: industry.html#manufacturing
+        - article [ref=e163]:
+          - button "Play video" [ref=e166] [cursor=pointer]
+          - generic [ref=e169]:
+            - heading "Projects" [level=3] [ref=e170]
+            - paragraph [ref=e171]: Job cost accounting, project budgets and billing for contractors and professional services.
+            - link "Explore →" [ref=e172] [cursor=pointer]:
+              - /url: industry.html#construction
+        - article [ref=e173]:
+          - button "Play video" [ref=e176] [cursor=pointer]
+          - generic [ref=e179]:
+            - heading "Business Intelligence & Analytics" [level=3] [ref=e180]
+            - paragraph [ref=e181]: Real-time dashboards, free-form reports and KPIs tuned to every role in your organisation.
+            - link "Explore →" [ref=e182] [cursor=pointer]:
+              - /url: business-function.html#reporting-analytics
+        - article [ref=e183]:
+          - button "Play video" [ref=e186] [cursor=pointer]
+          - generic [ref=e189]:
+            - heading "Rapid Integration" [level=3] [ref=e190]
+            - paragraph [ref=e191]: Connect your ERP to the tools you already use — Microsoft 365, eCommerce and more.
+            - link "Explore →" [ref=e192] [cursor=pointer]:
+              - /url: products.html
+    - generic [ref=e194]:
+      - generic [ref=e195]:
+        - generic [ref=e196]:
+          - paragraph [ref=e197]: What we do
+          - heading "From analysis to support, we stay committed" [level=2] [ref=e198]: From analysis to support,we stay committed
+        - link "Our services →" [ref=e199] [cursor=pointer]:
+          - /url: services.html
+          - text: Our services
+          - generic [ref=e200]: →
+      - generic [ref=e201]:
+        - article [ref=e202]:
+          - heading "Implementation" [level=3] [ref=e206]
+          - paragraph [ref=e207]: Certified consultants guide you through the full lifecycle of an ERP project.
+          - link "Learn more →" [ref=e208] [cursor=pointer]:
+            - /url: services.html#implementation
+            - text: Learn more
+            - generic [ref=e209]: →
+        - article [ref=e210]:
+          - heading "Training" [level=3] [ref=e214]
+          - paragraph [ref=e215]: Deep, role-based training mapped to your processes — from users to administrators.
+          - link "Learn more →" [ref=e216] [cursor=pointer]:
+            - /url: services.html#training
+            - text: Learn more
+            - generic [ref=e217]: →
+        - article [ref=e218]:
+          - heading "Development" [level=3] [ref=e222]
+          - paragraph [ref=e223]: Customised processes and integrations tailored to the exact needs of your business.
+          - link "Learn more →" [ref=e224] [cursor=pointer]:
+            - /url: services.html#development
+            - text: Learn more
+            - generic [ref=e225]: →
+        - article [ref=e226]:
+          - heading "Support" [level=3] [ref=e230]
+          - paragraph [ref=e231]: Unlimited support across Teams, email, self-service portal and phone — always available.
+          - link "Learn more →" [ref=e232] [cursor=pointer]:
+            - /url: services.html#support
+            - text: Learn more
+            - generic [ref=e233]: →
+    - generic [ref=e235]:
+      - generic [ref=e236]:
+        - generic [ref=e237]:
+          - paragraph [ref=e238]: Business Functionality
+          - heading "Every function, unified in one system" [level=2] [ref=e239]
+        - link "All capabilities →" [ref=e240] [cursor=pointer]:
+          - /url: business-function.html
+          - text: All capabilities
+          - generic [ref=e241]: →
+      - generic [ref=e242]:
+        - link "Financial Management" [ref=e243] [cursor=pointer]:
+          - /url: business-function.html#financial-management
+        - link "Order Management" [ref=e244] [cursor=pointer]:
+          - /url: business-function.html#order-management
+        - link "Inventory Management" [ref=e245] [cursor=pointer]:
+          - /url: business-function.html#inventory-management
+        - link "Project Accounting" [ref=e246] [cursor=pointer]:
+          - /url: business-function.html#project-accounting
+        - link "Production Management" [ref=e247] [cursor=pointer]:
+          - /url: business-function.html#production-management
+        - link "CRM" [ref=e248] [cursor=pointer]:
+          - /url: business-function.html#customer-relationship
+        - link "Equipment & Service" [ref=e249] [cursor=pointer]:
+          - /url: business-function.html#equipment-service
+        - link "Online Stores & POS" [ref=e250] [cursor=pointer]:
+          - /url: business-function.html#ecommerce-pos
+        - link "Payroll & HR" [ref=e251] [cursor=pointer]:
+          - /url: business-function.html#payroll-hr
+        - link "Reporting & Analytics" [ref=e252] [cursor=pointer]:
+          - /url: business-function.html#reporting-analytics
+    - generic [ref=e254]:
+      - generic [ref=e255]:
+        - generic [ref=e256]: "0"
+        - generic [ref=e257]: Years delivering ERP solutions
+      - generic [ref=e258]:
+        - generic [ref=e259]: "0"
+        - generic [ref=e260]: Industry editions
+      - generic [ref=e261]:
+        - generic [ref=e262]: "0"
+        - generic [ref=e263]: Business functions
+      - generic [ref=e264]:
+        - generic [ref=e265]: "0"
+        - generic [ref=e266]: Continents — Africa & the Middle East
+    - generic [ref=e268]:
+      - img "Accware consultants at work" [ref=e271]
+      - generic [ref=e272]:
+        - paragraph [ref=e273]: About Accware
+        - heading "Your bridge to productive ERP solutions" [level=2] [ref=e274]
+        - paragraph [ref=e276]: Accware Solutions is an information technology firm founded to provide integrated business management applications that unify your workforce, process workflows and technology in a way that yields business productivity.
+        - list [ref=e277]:
+          - listitem [ref=e278]:
+            - strong [ref=e279]: Partnership
+            - text: — with software leaders like Acumatica and Microsoft
+          - listitem [ref=e280]:
+            - strong [ref=e281]: Experience
+            - text: — over 14 years implementing systems across industries and borders
+          - listitem [ref=e282]:
+            - strong [ref=e283]: Knowledge
+            - text: — a team of certified consultants at every stage of your project
+        - link "More about us →" [ref=e284] [cursor=pointer]:
+          - /url: about.html
+          - text: More about us
+          - generic [ref=e285]: →
+    - generic [ref=e287]:
+      - paragraph [ref=e288]: Let's build something productive
+      - heading "Ready to move your business forward?" [level=2] [ref=e289]
+      - paragraph [ref=e290]: Talk to a certified consultant about the right ERP foundation for your organisation — no obligation, just honest guidance.
+      - generic [ref=e291]:
+        - link "Get in Touch →" [ref=e292] [cursor=pointer]:
+          - /url: reach-us.html
+          - text: Get in Touch
+          - generic [ref=e293]: →
+        - link "Explore Services" [ref=e294] [cursor=pointer]:
+          - /url: services.html
+  - contentinfo [ref=e295]:
+    - generic [ref=e296]:
+      - generic [ref=e297]:
+        - generic [ref=e298]:
+          - link [ref=e299] [cursor=pointer]:
+            - /url: index.html
+            - img "Accware Solutions" [ref=e300]
+          - paragraph [ref=e301]: Your bridge to productive ERP solutions. Integrated business management applications that unify your workforce, process workflows and technology.
+          - link "LinkedIn" [ref=e303] [cursor=pointer]:
+            - /url: https://www.linkedin.com/company/accware-solutions/about/
+        - generic [ref=e306]:
+          - heading "Business Solutions" [level=4] [ref=e307]
+          - list [ref=e308]:
+            - listitem [ref=e309]:
+              - link "Financial Management" [ref=e310] [cursor=pointer]:
+                - /url: business-function.html#financial-management
+            - listitem [ref=e311]:
+              - link "Order Management" [ref=e312] [cursor=pointer]:
+                - /url: business-function.html#order-management
+            - listitem [ref=e313]:
+              - link "Inventory Management" [ref=e314] [cursor=pointer]:
+                - /url: business-function.html#inventory-management
+            - listitem [ref=e315]:
+              - link "Project Accounting & Management" [ref=e316] [cursor=pointer]:
+                - /url: business-function.html#project-accounting
+            - listitem [ref=e317]:
+              - link "Production Management" [ref=e318] [cursor=pointer]:
+                - /url: business-function.html#production-management
+            - listitem [ref=e319]:
+              - link "Customer Relationship Management" [ref=e320] [cursor=pointer]:
+                - /url: business-function.html#customer-relationship
+            - listitem [ref=e321]:
+              - link "Payroll & Human Resource" [ref=e322] [cursor=pointer]:
+                - /url: business-function.html#payroll-hr
+            - listitem [ref=e323]:
+              - link "Equipment Maintenance & Service" [ref=e324] [cursor=pointer]:
+                - /url: business-function.html#equipment-service
+            - listitem [ref=e325]:
+              - link "Online Stores & Point of Sale" [ref=e326] [cursor=pointer]:
+                - /url: business-function.html#ecommerce-pos
+            - listitem [ref=e327]:
+              - link "Reporting & Business Analytics" [ref=e328] [cursor=pointer]:
+                - /url: business-function.html#reporting-analytics
+        - text: ","
+        - generic [ref=e329]:
+          - heading "Industry Solutions" [level=4] [ref=e330]
+          - list [ref=e331]:
+            - listitem [ref=e332]:
+              - link "Construction" [ref=e333] [cursor=pointer]:
+                - /url: industry.html#construction
+            - listitem [ref=e334]:
+              - link "Distribution" [ref=e335] [cursor=pointer]:
+                - /url: industry.html#distribution
+            - listitem [ref=e336]:
+              - link "Manufacturing" [ref=e337] [cursor=pointer]:
+                - /url: industry.html#manufacturing
+            - listitem [ref=e338]:
+              - link "General Business (Non Profit)" [ref=e339] [cursor=pointer]:
+                - /url: industry.html#general-business
+            - listitem [ref=e340]:
+              - link "Field Service" [ref=e341] [cursor=pointer]:
+                - /url: industry.html#field-service
+            - listitem [ref=e342]:
+              - link "Retail Commerce" [ref=e343] [cursor=pointer]:
+                - /url: industry.html#retail-commerce
+        - text: ","
+        - generic [ref=e344]:
+          - heading "Company" [level=4] [ref=e345]
+          - list [ref=e346]:
+            - listitem [ref=e347]:
+              - link "About" [ref=e348] [cursor=pointer]:
+                - /url: about.html
+            - listitem [ref=e349]:
+              - link "Contacts" [ref=e350] [cursor=pointer]:
+                - /url: reach-us.html
+            - listitem [ref=e351]:
+              - link "Blog" [ref=e352] [cursor=pointer]:
+                - /url: blog.html
+            - listitem [ref=e353]:
+              - link "Privacy" [ref=e354] [cursor=pointer]:
+                - /url: privacy.html
+      - generic [ref=e355]:
+        - generic [ref=e356]: © 2026 Accware Solutions. All rights reserved.
+        - generic [ref=e357]:
+          - link "Privacy" [ref=e358] [cursor=pointer]:
+            - /url: privacy.html
+          - text: ·
+          - link "Contact" [ref=e359] [cursor=pointer]:
+            - /url: reach-us.html
+          - text: ·
+          - link "Support Portal" [ref=e360] [cursor=pointer]:
+            - /url: https://selfservice.accware.ug:8443/
