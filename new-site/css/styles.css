@@ -676,10 +676,10 @@ h1, h2, h3, h4 { margin: 0; font-family: var(--font-display); line-height: 1.1; 
 /* MOBILE */
 @media (max-width: 768px) {
   .erp-animation { max-width: 100%; aspect-ratio: 1 / 1; margin-top: 0; }
-  .erp-module { min-width: 90px; padding: 7px; gap: 5px; }
-  .erp-module strong { font-size: 7px; }
-  .erp-module small { font-size: 7px; }
-  .module-icon { font-size: 14px; width: 16px; }
+  .erp-module { min-width: 72px; padding: 6px 9px; gap: 6px; }
+  .erp-module strong { font-size: 8px; }
+  .erp-module small { display: none; }
+  .module-icon { font-size: 13px; width: 15px; }
   .core-rotator { font-size: 12px; }
   .finance { top: 3%; }
   .sales { left: 2%; top: 19%; }
