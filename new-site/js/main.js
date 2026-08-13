@@ -264,9 +264,19 @@
       var video = media.querySelector("video");
       var btn = media.querySelector(".play-btn");
       if (!video || !btn) return;
+      video.addEventListener("click", function () {
+        if (!video.paused) {
+          video.pause();
+          media.classList.remove("playing");
+          btn.setAttribute("aria-label", "Play video");
+        }
+      });
+      video.addEventListener("ended", function () {
+        media.classList.remove("playing");
+        btn.setAttribute("aria-label", "Play video");
+      });
       btn.addEventListener("click", function () {
         if (video.paused) {
-          // pause all other playing videos first
           document.querySelectorAll(".img-card .media.playing").forEach(function (m) {
             var v = m.querySelector("video");
             if (v && v !== video) { v.pause(); m.classList.remove("playing"); }
@@ -275,13 +285,12 @@
           video.volume = 1;
           video.play();
           media.classList.add("playing");
+          btn.setAttribute("aria-label", "Pause video");
         } else {
           video.pause();
           media.classList.remove("playing");
+          btn.setAttribute("aria-label", "Play video");
         }
-      });
-      video.addEventListener("ended", function () {
-        media.classList.remove("playing");
       });
     });
   }
