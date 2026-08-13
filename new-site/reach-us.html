@@ -3,6 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; script-src 'self'; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://accware.ug; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self' https://formspree.io;" />
   <title>Reach Us | Accware Solutions</title>
   <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
   <link rel="icon" type="image/png" sizes="128x128" href="assets/favicon-128x128.png" />
@@ -84,7 +87,7 @@
         <div class="contact-card reveal">
           <p class="eyebrow" style="margin-bottom:6px;">Send a message</p>
           <h3>Tell us about your business</h3>
-          <form class="form" id="contact-form" style="margin-top:22px;">
+          <form class="form" id="contact-form" action="https://formspree.io/f/xrbqjjqy" method="POST" style="margin-top:22px;">
             <div class="form-row">
               <div class="field">
                 <label for="f-name">Full name</label>
@@ -154,7 +157,7 @@
               <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M10 14a3.5 3.5 0 0 0 5 0l4-4a3.5 3.5 0 0 0-5-5l-1.5 1.5M14 10a3.5 3.5 0 0 0-5 0l-4 4a3.5 3.5 0 0 0 5 5l1.5-1.5"/></svg></span>
               <div>
                 <h4>On the web</h4>
-                <p><a href="https://www.linkedin.com/company/accware-solutions/about/" target="_blank" rel="noopener">LinkedIn</a> · <a href="https://selfservice.accware.ug:8443/" target="_blank" rel="noopener">Support Portal</a></p>
+                <p><a href="https://www.linkedin.com/company/accware-solutions/about/" target="_blank" rel="noopener noreferrer">LinkedIn</a> · <a href="https://selfservice.accware.ug:8443/" target="_blank" rel="noopener noreferrer">Support Portal</a></p>
               </div>
             </li>
           </ul>
@@ -168,5 +171,7 @@
   <script src="js/main.min.js?v=3"></script>
 </body>
 </html>
+
+
 
 

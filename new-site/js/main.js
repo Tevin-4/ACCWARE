@@ -124,7 +124,7 @@
   function renderHeader() {
     var el = document.getElementById("site-header");
     if (!el) return;
-    el.outerHTML =
+    el.insertAdjacentHTML("beforebegin",
       '<header class="site-header">' +
       '<div class="header-inner">' +
       '<a class="brand" href="index.html" aria-label="Accware Solutions — home">' +
@@ -141,13 +141,15 @@
       "</div>" +
       "</div>" +
       "</header>" +
-      '<div class="header-spacer"></div>';
+      '<div class="header-spacer"></div>');
+    el.remove();
   }
 
   function renderFooter() {
     var el = document.getElementById("site-footer");
     if (!el) return;
-    el.outerHTML = '<footer class="site-footer">' + footerMarkup() + "</footer>";
+    el.insertAdjacentHTML("beforebegin", '<footer class="site-footer">' + footerMarkup() + "</footer>");
+    el.remove();
   }
 
   function initNav() {
@@ -338,11 +340,35 @@
     form.addEventListener("submit", function (e) {
       e.preventDefault();
       var status = document.getElementById("form-status");
-      if (status) {
-        status.textContent = "Thank you — your message has been prepared. ";
-        status.textContent += "Please send it to info@accware.ug or call +256 705 969313.";
-      }
-      form.reset();
+      var btn = form.querySelector('button[type="submit"]');
+      var originalText = btn ? btn.innerHTML : "";
+      if (btn) { btn.disabled = true; btn.textContent = "Sending..."; }
+      fetch(form.action, {
+        method: "POST",
+        body: new FormData(form),
+        headers: { "Accept": "application/json" }
+      })
+      .then(function (response) {
+        if (status) {
+          if (response.ok) {
+            status.textContent = "Thank you — your message has been sent. We'll be in touch shortly.";
+            status.style.color = "#1a1a1a";
+            form.reset();
+          } else {
+            status.textContent = "Something went wrong. Please email us directly at info@accware.ug or call +256 705 969313.";
+            status.style.color = "#c41e1e";
+          }
+        }
+      })
+      .catch(function () {
+        if (status) {
+          status.textContent = "Network error. Please try again or email us directly at info@accware.ug.";
+          status.style.color = "#c41e1e";
+        }
+      })
+      .finally(function () {
+        if (btn) { btn.disabled = false; btn.innerHTML = originalText; }
+      });
     });
   }
 

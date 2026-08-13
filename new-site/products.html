@@ -3,6 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; script-src 'self'; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://accware.ug; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self' https://formspree.io;" />
   <title>Products | Accware Solutions</title>
   <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
   <link rel="icon" type="image/png" sizes="128x128" href="assets/favicon-128x128.png" />
@@ -91,8 +94,8 @@
               </p>
             </div>
             <div class="hero-actions">
-              <a class="btn btn-navy" href="https://www.acumatica.com/" target="_blank" rel="noopener">Learn more <span class="arrow">→</span></a>
-              <a class="btn btn-line" href="https://acumatica.accware.ug/" target="_blank" rel="noopener">Open your Acumatica instance</a>
+              <a class="btn btn-navy" href="https://www.acumatica.com/" target="_blank" rel="noopener noreferrer">Learn more <span class="arrow">→</span></a>
+              <a class="btn btn-line" href="https://acumatica.accware.ug/" target="_blank" rel="noopener noreferrer">Open your Acumatica instance</a>
             </div>
           </div>
         </div>
@@ -110,7 +113,7 @@
                 your business ambitions — and helps you run your business more efficiently.
               </p>
             </div>
-            <a class="btn btn-navy" href="https://dynamics.microsoft.com/en-us/sl-overview/" target="_blank" rel="noopener">Learn more <span class="arrow">→</span></a>
+            <a class="btn btn-navy" href="https://dynamics.microsoft.com/en-us/sl-overview/" target="_blank" rel="noopener noreferrer">Learn more <span class="arrow">→</span></a>
           </div>
           <div class="visual reveal reveal-delay-1" style="padding:clamp(24px,4vw,44px);display:grid;place-items:center;background:#fff;">
             <picture><source srcset="assets/logos/dynamics-sl.webp" type="image/webp"><img width="200" height="200" loading="lazy" src="assets/logos/dynamics-sl.png" alt="Microsoft Dynamics SL" style="width:min(280px,70%);" /></picture>
@@ -133,7 +136,7 @@
                 required from you.
               </p>
             </div>
-            <a class="btn btn-navy" href="https://www.payspace.com/" target="_blank" rel="noopener">Learn more <span class="arrow">→</span></a>
+            <a class="btn btn-navy" href="https://www.payspace.com/" target="_blank" rel="noopener noreferrer">Learn more <span class="arrow">→</span></a>
           </div>
         </div>
 
@@ -154,25 +157,25 @@
             <div class="card-icon" style="background:transparent;border:1px solid var(--line);"><picture><source srcset="assets/logos/microsoft-365.webp" type="image/webp"><img width="256" height="256" loading="lazy" src="assets/logos/microsoft-365.webp" alt="Microsoft 365" style="width:26px;height:26px;" /></picture></div>
             <h3>Microsoft 365</h3>
             <p>A suite of apps that help you stay connected and get things done — Word, Excel, Outlook, PowerPoint, Teams and OneDrive.</p>
-            <a class="link" href="https://www.microsoft.com/en-us/microsoft-365" target="_blank" rel="noopener">Learn more <span class="arrow">→</span></a>
+            <a class="link" href="https://www.microsoft.com/en-us/microsoft-365" target="_blank" rel="noopener noreferrer">Learn more <span class="arrow">→</span></a>
           </article>
           <article class="card reveal reveal-delay-1">
             <div class="card-icon" style="background:transparent;border:1px solid var(--line);"><picture><source srcset="assets/logos/power-platform.webp" type="image/webp"><img width="225" height="225" loading="lazy" src="assets/logos/power-platform.webp" alt="Microsoft Power Platform" style="width:26px;height:26px;border-radius:4px;" /></picture></div>
             <h3>Power Platform</h3>
             <p>Analyze data, build solutions, automate processes and create virtual agents. Powerful alone, better together with 365 and Dynamics 365.</p>
-            <a class="link" href="https://powerplatform.microsoft.com/en-us/" target="_blank" rel="noopener">Learn more <span class="arrow">→</span></a>
+            <a class="link" href="https://powerplatform.microsoft.com/en-us/" target="_blank" rel="noopener noreferrer">Learn more <span class="arrow">→</span></a>
           </article>
           <article class="card reveal reveal-delay-2">
             <div class="card-icon" style="background:transparent;border:1px solid var(--line);"><picture><source srcset="assets/logos/azure.webp" type="image/webp"><img width="225" height="225" loading="lazy" src="assets/logos/azure.webp" alt="Microsoft Azure" style="width:26px;height:26px;border-radius:4px;" /></picture></div>
             <h3>Microsoft Azure</h3>
             <p>Host applications and create secure, future-ready cloud solutions on Azure.</p>
-            <a class="link" href="https://azure.microsoft.com/en-us/" target="_blank" rel="noopener">Learn more <span class="arrow">→</span></a>
+            <a class="link" href="https://azure.microsoft.com/en-us/" target="_blank" rel="noopener noreferrer">Learn more <span class="arrow">→</span></a>
           </article>
           <article class="card reveal reveal-delay-3">
             <div class="card-icon" style="background:transparent;border:1px solid var(--line);"><picture><source srcset="assets/logos/aws.webp" type="image/webp"><img width="259" height="194" loading="lazy" src="assets/logos/aws.webp" alt="Amazon Web Services" style="width:26px;height:26px;" /></picture></div>
             <h3>Amazon Web Services</h3>
             <p>Compute power, database storage, content delivery and more — flexible, scalable and reliable cloud infrastructure.</p>
-            <a class="link" href="https://aws.amazon.com/" target="_blank" rel="noopener">Learn more <span class="arrow">→</span></a>
+            <a class="link" href="https://aws.amazon.com/" target="_blank" rel="noopener noreferrer">Learn more <span class="arrow">→</span></a>
           </article>
         </div>
       </div>
@@ -197,5 +200,7 @@
   <script src="js/main.min.js?v=3"></script>
 </body>
 </html>
+
+
 
 
