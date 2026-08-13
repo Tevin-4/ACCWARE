@@ -341,34 +341,43 @@
       e.preventDefault();
       var status = document.getElementById("form-status");
       var btn = form.querySelector('button[type="submit"]');
-      var originalText = btn ? btn.innerHTML : "";
-      if (btn) { btn.disabled = true; btn.textContent = "Sending..."; }
-      fetch(form.action, {
+      var original = btn ? btn.innerHTML : "";
+      var fields = ["name", "email", "company", "phone", "topic", "message"];
+      var data = {};
+      fields.forEach(function (f) {
+        var el = form.elements[f];
+        data[f] = el ? el.value.trim() : "";
+      });
+      var honey = form.elements["_honey"];
+      if (honey && honey.value) return;
+      if (btn) { btn.disabled = true; btn.innerHTML = "Sending…"; }
+      if (status) status.textContent = "";
+      fetch("/api/contact", {
         method: "POST",
-        body: new FormData(form),
-        headers: { "Accept": "application/json" }
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
       })
-      .then(function (response) {
-        if (status) {
-          if (response.ok) {
-            status.textContent = "Thank you — your message has been sent. We'll be in touch shortly.";
-            status.style.color = "#1a1a1a";
+        .then(function (r) {
+          return r.json().then(function (j) { return { ok: r.ok, body: j }; });
+        })
+        .then(function (res) {
+          if (res.ok && res.body && res.body.ok) {
+            if (status) {
+              status.textContent = "Thank you — your message is on its way. We'll reply to " + data.email + " shortly.";
+            }
             form.reset();
           } else {
-            status.textContent = "Something went wrong. Please email us directly at info@accware.ug or call +256 705 969313.";
-            status.style.color = "#c41e1e";
+            throw new Error((res.body && res.body.error) || "Something went wrong.");
           }
-        }
-      })
-      .catch(function () {
-        if (status) {
-          status.textContent = "Network error. Please try again or email us directly at info@accware.ug.";
-          status.style.color = "#c41e1e";
-        }
-      })
-      .finally(function () {
-        if (btn) { btn.disabled = false; btn.innerHTML = originalText; }
-      });
+        })
+        .catch(function (err) {
+          if (status) {
+            status.textContent = "Sorry — " + err.message + " Please email info@accware.ug directly.";
+          }
+        })
+        .finally(function () {
+          if (btn) { btn.disabled = false; btn.innerHTML = original; }
+        });
     });
   }
 

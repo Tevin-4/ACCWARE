@@ -4,3 +4,7 @@ node_modules/
 .idea/
 .wix/
 jsconfig.json
+
+# wrangler build/cache
+.wrangler/
+new-site/.wrangler/
