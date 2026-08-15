@@ -570,4 +570,32 @@
   }
 
   initChatWidget();
+
+  /* ---------- Eye Tracking ---------- */
+  (function () {
+    var pupils = document.querySelectorAll(".chat-pupil");
+    if (!pupils.length) return;
+
+    var maxMoveX = 4;
+    var maxMoveY = 5;
+
+    document.addEventListener("mousemove", function (e) {
+      for (var i = 0; i < pupils.length; i++) {
+        var eye = pupils[i].parentElement;
+        var eyeRect = eye.getBoundingClientRect();
+        var eyeCenterX = eyeRect.left + eyeRect.width / 2;
+        var eyeCenterY = eyeRect.top + eyeRect.height / 2;
+
+        var dx = e.clientX - eyeCenterX;
+        var dy = e.clientY - eyeCenterY;
+        var angle = Math.atan2(dy, dx);
+
+        var dist = Math.min(Math.sqrt(dx * dx + dy * dy) / 12, 1);
+        var px = Math.cos(angle) * maxMoveX * dist;
+        var py = Math.sin(angle) * maxMoveY * dist;
+
+        pupils[i].style.transform = "translate(calc(-50% + " + px + "px), calc(-50% + " + py + "px))";
+      }
+    });
+  })();
 })();
