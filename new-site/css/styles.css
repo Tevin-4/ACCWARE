@@ -568,7 +568,7 @@ h1, h2, h3, h4 { margin: 0; font-family: var(--font-display); line-height: 1.1; 
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: radial-gradient(circle, #102638 0%, #07131f 70%);
+  background: radial-gradient(circle, #1e1e1e 0%, #161616 70%);
   border: 1px solid rgba(255, 100, 45, 0.8);
   box-shadow: 0 0 30px rgba(255, 91, 35, 0.15), inset 0 0 30px rgba(255, 91, 35, 0.05);
   z-index: 5;
