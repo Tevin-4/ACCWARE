@@ -338,6 +338,7 @@ h1, h2, h3, h4 { margin: 0; font-family: var(--font-display); line-height: 1.1; 
 /* CTA in pill (desktop) */
 .header-right { display: flex; align-items: center; gap: 16px; }
 .header-cta { white-space: nowrap; }
+.header-cta .btn { padding: 10px 20px; font-size: 13px; }
 .nav-cta { display: none; }
 
 /* Dropdown */
