@@ -1,3 +1,5 @@
+import { checkRateLimit, rateLimitResponse } from "./_rate-limit.js";
+
 const SYSTEM_PROMPT_BASE = `You are the Accware Solutions AI assistant — a helpful, professional chatbot for a Uganda-based IT firm and Acumatica Gold Partner. You answer questions about ERP software, products, services, and how to get started.
 
 RULES:
@@ -104,6 +106,11 @@ export async function onRequestPost(context) {
       status: 500,
       headers: { "Content-Type": "application/json" }
     });
+  }
+
+  const ip = request.headers.get("CF-Connecting-IP") || request.headers.get("X-Forwarded-For") || "unknown";
+  if (await checkRateLimit(env, ip)) {
+    return rateLimitResponse();
   }
 
   let body;

@@ -1,3 +1,5 @@
+import { checkRateLimit, rateLimitResponse } from "./_rate-limit.js";
+
 function clean(value) {
   return typeof value === "string" ? value.trim() : "";
 }
@@ -21,6 +23,11 @@ export async function onRequestPost(context) {
 
     if (body._honey) {
       return json({ ok: true });
+    }
+
+    const ip = request.headers.get("CF-Connecting-IP") || request.headers.get("X-Forwarded-For") || "unknown";
+    if (await checkRateLimit(env, ip)) {
+      return rateLimitResponse();
     }
 
     var name = clean(body.name);
