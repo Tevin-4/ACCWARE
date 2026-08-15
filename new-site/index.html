@@ -468,7 +468,7 @@
         var ccx = cr.left + cr.width / 2;
         var ccy = cr.top + cr.height / 2;
         var ring = svg.querySelector(".ring-outer");
-        var rPx = (ring — parseFloat(ring.getAttribute("r")) : 105) * ctm.a;
+        var rPx = (ring ? parseFloat(ring.getAttribute("r")) : 105) * ctm.a;
         var modules = panel.querySelectorAll(".erp-module");
         var paths = svg.querySelectorAll(".connection");
         var particles = svg.querySelectorAll(".data-particle animateMotion");
@@ -483,7 +483,7 @@
           var ex, ey;
           if (mcx < ccx - 5) { ex = r.right; ey = mcy; }
           else if (mcx > ccx + 5) { ex = r.left; ey = mcy; }
-          else { ex = mcx; ey = (mcy < ccy) — r.bottom : r.top; }
+          else { ex = mcx; ey = (mcy < ccy) ? r.bottom : r.top; }
           function toUser(px, py) {
             var pt = svg.createSVGPoint();
             pt.x = px; pt.y = py;
