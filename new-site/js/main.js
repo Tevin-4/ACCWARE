@@ -576,25 +576,46 @@
     var pupils = document.querySelectorAll(".chat-pupil");
     if (!pupils.length) return;
 
-    var maxMoveX = 5;
-    var maxMoveY = 6;
+    var maxMove = 7;
+
+    function centerPupils() {
+      for (var i = 0; i < pupils.length; i++) {
+        var p = pupils[i];
+        var eye = p.parentElement;
+        var ew = eye.offsetWidth;
+        var eh = eye.offsetHeight;
+        var pw = p.offsetWidth;
+        var ph = p.offsetHeight;
+        p.style.left = ((ew - pw) / 2) + "px";
+        p.style.top = ((eh - ph) / 2) + "px";
+      }
+    }
+    centerPupils();
+    window.addEventListener("resize", centerPupils);
 
     document.addEventListener("mousemove", function (e) {
       for (var i = 0; i < pupils.length; i++) {
         var eye = pupils[i].parentElement;
-        var eyeRect = eye.getBoundingClientRect();
-        var eyeCenterX = eyeRect.left + eyeRect.width / 2;
-        var eyeCenterY = eyeRect.top + eyeRect.height / 2;
+        var rect = eye.getBoundingClientRect();
+        var cx = rect.left + rect.width / 2;
+        var cy = rect.top + rect.height / 2;
 
-        var dx = e.clientX - eyeCenterX;
-        var dy = e.clientY - eyeCenterY;
+        var dx = e.clientX - cx;
+        var dy = e.clientY - cy;
+        var dist = Math.sqrt(dx * dx + dy * dy);
         var angle = Math.atan2(dy, dx);
+        var factor = Math.min(dist / 80, 1);
 
-        var dist = Math.min(Math.sqrt(dx * dx + dy * dy) / 10, 1);
-        var px = Math.cos(angle) * maxMoveX * dist;
-        var py = Math.sin(angle) * maxMoveY * dist;
+        var ox = Math.cos(angle) * maxMove * factor;
+        var oy = Math.sin(angle) * maxMove * factor;
 
-        pupils[i].style.transform = "translate(calc(-50% + " + px + "px), calc(-50% + " + py + "px))";
+        var pw = pupils[i].offsetWidth;
+        var ph = pupils[i].offsetHeight;
+        var baseX = (eye.offsetWidth - pw) / 2;
+        var baseY = (eye.offsetHeight - ph) / 2;
+
+        pupils[i].style.left = (baseX + ox) + "px";
+        pupils[i].style.top = (baseY + oy) + "px";
       }
     });
   })();
