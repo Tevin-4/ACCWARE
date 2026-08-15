@@ -466,7 +466,9 @@
     function addMessage(role, text) {
       var div = document.createElement("div");
       div.className = "chat-msg " + role;
-      div.innerHTML = "<p>" + text + "</p>";
+      var p = document.createElement("p");
+      p.textContent = text;
+      div.appendChild(p);
       messages.appendChild(div);
       scrollToBottom();
       return div;

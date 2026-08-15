@@ -124,6 +124,17 @@ export async function onRequestPost(context) {
     });
   }
 
+  const MAX_MSG_LEN = 4000;
+  for (var i = 0; i < messages.length; i++) {
+    var m = messages[i];
+    if (!m || typeof m.role !== "string" || typeof m.content !== "string" || m.content.length > MAX_MSG_LEN) {
+      return new Response(JSON.stringify({ error: "Invalid or too-long message." }), {
+        status: 400,
+        headers: { "Content-Type": "application/json" }
+      });
+    }
+  }
+
   const userMessages = messages.filter(function (m) { return m.role === "user"; });
   const isFirstInteraction = userMessages.length === 1;
 
@@ -149,6 +160,8 @@ export async function onRequestPost(context) {
     });
 
     if (!response.ok) {
+      var detail = await response.text().catch(function () { return ""; });
+      console.error("AI gateway error", response.status, detail);
       return new Response(JSON.stringify({ error: "AI service error." }), {
         status: 502,
         headers: { "Content-Type": "application/json" }
