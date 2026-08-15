@@ -9,25 +9,6 @@ function json(data, status) {
   });
 }
 
-// Basic in-memory per-IP rate limiter (note: Pages Functions run across many
-// isolates, so this is a best-effort deterrent, not a hard guarantee).
-const rateHits = new Map();
-const RATE_WINDOW_MS = 10 * 60 * 1000;
-const RATE_MAX = 5;
-
-function isRateLimited(ip) {
-  const now = Date.now();
-  const prev = rateHits.get(ip);
-  const recent = prev ? prev.filter(function (t) { return now - t < RATE_WINDOW_MS; }) : [];
-  if (recent.length >= RATE_MAX) {
-    rateHits.set(ip, recent);
-    return true;
-  }
-  recent.push(now);
-  rateHits.set(ip, recent);
-  return false;
-}
-
 export async function onRequestPost(context) {
   const { request, env } = context;
   try {
@@ -36,11 +17,6 @@ export async function onRequestPost(context) {
       body = await request.json();
     } catch (e) {
       return json({ ok: false, error: "Invalid request body." }, 400);
-    }
-
-    const ip = request.headers.get("CF-Connecting-IP") || request.headers.get("X-Forwarded-For") || "unknown";
-    if (isRateLimited(ip)) {
-      return json({ ok: false, error: "Too many messages — please try again later." }, 429);
     }
 
     if (body._honey) {
