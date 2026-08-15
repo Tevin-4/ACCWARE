@@ -442,4 +442,132 @@
       if (svg.pauseAnimations) svg.pauseAnimations();
     });
   }
+
+  /* ---------- AI Chat Widget ---------- */
+  function initChatWidget() {
+    var widget = document.getElementById("chat-widget");
+    var toggle = document.getElementById("chat-toggle");
+    var panel = document.getElementById("chat-panel");
+    var closeBtn = document.getElementById("chat-close");
+    var messages = document.getElementById("chat-messages");
+    var form = document.getElementById("chat-form");
+    var input = document.getElementById("chat-input");
+    var sendBtn = document.getElementById("chat-send");
+    if (!widget || !toggle) return;
+
+    var isOpen = false;
+    var isStreaming = false;
+    var chatHistory = [];
+
+    function scrollToBottom() {
+      messages.scrollTop = messages.scrollHeight;
+    }
+
+    function addMessage(role, text) {
+      var div = document.createElement("div");
+      div.className = "chat-msg " + role;
+      div.innerHTML = "<p>" + text + "</p>";
+      messages.appendChild(div);
+      scrollToBottom();
+      return div;
+    }
+
+    function showTyping() {
+      var div = document.createElement("div");
+      div.className = "chat-typing";
+      div.id = "chat-typing";
+      div.innerHTML = "<span></span><span></span><span></span>";
+      messages.appendChild(div);
+      scrollToBottom();
+    }
+
+    function removeTyping() {
+      var el = document.getElementById("chat-typing");
+      if (el) el.remove();
+    }
+
+    function toggleWidget() {
+      isOpen = !isOpen;
+      widget.classList.toggle("open", isOpen);
+      if (isOpen) input.focus();
+    }
+
+    toggle.addEventListener("click", toggleWidget);
+    closeBtn.addEventListener("click", function () { isOpen = false; widget.classList.remove("open"); });
+
+    document.querySelectorAll(".chat-quick-btn").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        input.value = btn.getAttribute("data-msg");
+        form.dispatchEvent(new Event("submit"));
+      });
+    });
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var text = input.value.trim();
+      if (!text || isStreaming) return;
+
+      addMessage("user", text);
+      chatHistory.push({ role: "user", content: text });
+      input.value = "";
+      sendBtn.disabled = true;
+      isStreaming = true;
+      showTyping();
+
+      var botDiv = document.createElement("div");
+      botDiv.className = "chat-msg bot";
+      botDiv.innerHTML = "<p></p>";
+      messages.appendChild(botDiv);
+      var pEl = botDiv.querySelector("p");
+      var fullText = "";
+
+      fetch("/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ messages: chatHistory })
+      })
+        .then(function (response) {
+          removeTyping();
+          if (!response.ok) throw new Error("Service unavailable");
+          var reader = response.body.getReader();
+          var decoder = new TextDecoder();
+          function read() {
+            return reader.read().then(function (result) {
+              if (result.done) {
+                isStreaming = false;
+                sendBtn.disabled = false;
+                chatHistory.push({ role: "assistant", content: fullText });
+                scrollToBottom();
+                return;
+              }
+              var chunk = decoder.decode(result.value, { stream: true });
+              var lines = chunk.split("\n");
+              for (var i = 0; i < lines.length; i++) {
+                var line = lines[i].replace(/^data: /, "");
+                if (line === "[DONE]") continue;
+                try {
+                  var parsed = JSON.parse(line);
+                  var token = parsed.choices && parsed.choices[0] && parsed.choices[0].delta && parsed.choices[0].delta.content;
+                  if (token) {
+                    fullText += token;
+                    pEl.textContent = fullText;
+                    scrollToBottom();
+                  }
+                } catch (err) { /* skip malformed lines */ }
+              }
+              return read();
+            });
+          }
+          return read();
+        })
+        .catch(function (err) {
+          removeTyping();
+          isStreaming = false;
+          sendBtn.disabled = false;
+          pEl.textContent = "Sorry, I'm unavailable right now. Please email info@accware.ug or call +256 705 969313.";
+        });
+    });
+  }
+
+  initChatWidget();
 })();
