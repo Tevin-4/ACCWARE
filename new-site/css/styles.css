@@ -1236,7 +1236,7 @@ tr:last-child td { border-bottom: 0; }
 .chat-widget { position: fixed; bottom: 28px; right: 28px; z-index: 9999; font-family: var(--font-body); }
 
 .chat-toggle {
-  width: 80px; height: 80px; border: 0; cursor: pointer; position: relative;
+  width: 65px; height: 65px; border: 0; cursor: pointer; position: relative;
   background: transparent; padding: 0;
   filter: drop-shadow(0 6px 20px rgba(244,74,34,0.4));
   transition: transform 0.3s var(--ease), filter 0.3s var(--ease);
@@ -1244,7 +1244,7 @@ tr:last-child td { border-bottom: 0; }
 .chat-toggle:hover { transform: scale(1.08); filter: drop-shadow(0 8px 28px rgba(244,74,34,0.55)); }
 
 .chat-bubble-body {
-  width: 80px; height: 80px; position: relative;
+  width: 65px; height: 65px; position: relative;
   background: var(--gold-grad); border-radius: 50%;
   display: flex; align-items: center; justify-content: center;
 }
@@ -1286,6 +1286,18 @@ tr:last-child td { border-bottom: 0; }
   flex-direction: column;
 }
 .chat-widget.open .chat-panel { display: flex; }
+
+.chat-resize-handle {
+  position: absolute; left: -5px; top: 0; bottom: 0; width: 10px;
+  cursor: ew-resize; z-index: 5; touch-action: none;
+}
+.chat-resize-handle::after {
+  content: ""; position: absolute; left: 3px; top: 50%; transform: translateY(-50%);
+  width: 2px; height: 32px; border-radius: 2px;
+  background: rgba(22, 22, 22, 0.2); opacity: 0; transition: opacity 0.2s;
+}
+.chat-panel:hover .chat-resize-handle::after,
+.chat-panel.resizing .chat-resize-handle::after { opacity: 1; }
 
 .chat-header {
   display: flex; align-items: center; justify-content: space-between;
@@ -1343,8 +1355,9 @@ tr:last-child td { border-bottom: 0; }
 @media (max-width: 480px) {
   .chat-panel { width: calc(100vw - 32px); right: -8px; bottom: 92px; max-height: 70vh; }
   .chat-widget { bottom: 16px; right: 16px; }
-  .chat-toggle { width: 64px; height: 64px; }
-  .chat-bubble-body { width: 64px; height: 64px; }
+  .chat-toggle { width: 60px; height: 60px; }
+  .chat-bubble-body { width: 60px; height: 60px; }
+  .chat-resize-handle { display: none; }
   .chat-eye { width: 18px; height: 22px; }
   .chat-pupil { width: 9px; height: 9px; }
 }

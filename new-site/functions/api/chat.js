@@ -1,4 +1,4 @@
-const SYSTEM_PROMPT = `You are the Accware Solutions AI assistant — a helpful, professional chatbot for a Uganda-based IT firm and Acumatica Gold Partner. You answer questions about ERP software, products, services, and how to get started.
+const SYSTEM_PROMPT_BASE = `You are the Accware Solutions AI assistant — a helpful, professional chatbot for a Uganda-based IT firm and Acumatica Gold Partner. You answer questions about ERP software, products, services, and how to get started.
 
 RULES:
 - Be concise, warm, and professional. Keep answers under 3 sentences unless the user asks for detail.
@@ -47,10 +47,59 @@ Financial Management, Order Management, Inventory Management, Project Accounting
 HOW TO GET STARTED:
 Visit https://accware.ug/reach-us.html or call +256 705 969313 for a free consultation.`;
 
+const CONTACT_REQUEST = `\n\nFIRST INTERACTION RULE (IMPORTANT):\nAfter answering the user's very first question, you MUST add this exact message at the end of your response:\n\n"To better assist you, could you share your name and preferred contact method (phone number or email)? This will help us follow up if needed."\n\nDo NOT ask for contact info on subsequent messages — only after the first question.`;
+
+async function sendChatEmail(env, allMessages, latestAssistantResponse) {
+  const apiKey = env.RESEND_API_KEY;
+  if (!apiKey) return;
+
+  const from = env.FROM_EMAIL || "Accware Solutions <onboarding@resend.dev>";
+  const to = env.TO_EMAIL || "info@accware.ug";
+
+  const lines = ["=== Chat Conversation ===", ""];
+
+  allMessages.forEach(function (msg) {
+    if (msg.role === "user") {
+      lines.push("Visitor: " + msg.content);
+    } else if (msg.role === "assistant") {
+      lines.push("AI: " + msg.content);
+    }
+    lines.push("");
+  });
+
+  if (latestAssistantResponse) {
+    lines.push("AI: " + latestAssistantResponse);
+    lines.push("");
+  }
+
+  lines.push("========================");
+  lines.push("Source: accware.ug chat widget");
+  lines.push("Time: " + new Date().toISOString());
+
+  try {
+    await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: {
+        "Authorization": "Bearer " + apiKey,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        from: from,
+        to: [to],
+        subject: "Chat Conversation — " + (allMessages[0]?.content || "New chat").substring(0, 60),
+        text: lines.join("\n")
+      })
+    });
+  } catch (e) {
+    console.error("Failed to send chat email", e);
+  }
+}
+
 export async function onRequestPost(context) {
   const { request, env } = context;
 
-  if (!env.OPENAI_API_KEY) {
+  const apiKey = env.OPENAI_API_KEY || env.OPENAL_API_KEY;
+  if (!apiKey) {
     return new Response(JSON.stringify({ error: "AI service not configured." }), {
       status: 500,
       headers: { "Content-Type": "application/json" }
@@ -75,17 +124,20 @@ export async function onRequestPost(context) {
     });
   }
 
+  const userMessages = messages.filter(function (m) { return m.role === "user"; });
+  const isFirstInteraction = userMessages.length === 1;
+
   const openaiMessages = [
-    { role: "system", content: SYSTEM_PROMPT },
+    { role: "system", content: SYSTEM_PROMPT_BASE + (isFirstInteraction ? CONTACT_REQUEST : "") },
     ...messages.slice(-20)
   ];
 
   try {
-    const response = await fetch("https://api.openai.com/v1/chat/completions", {
+    const response = await fetch("https://gateway.ai.cloudflare.com/v1/4fcbd0af111d7cbc1159e7eda5c63b21/accware-chat/openai/chat/completions", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": "Bearer " + env.OPENAI_API_KEY
+        "Authorization": "Bearer " + apiKey
       },
       body: JSON.stringify({
         model: "gpt-4o-mini",
@@ -97,14 +149,43 @@ export async function onRequestPost(context) {
     });
 
     if (!response.ok) {
-      const err = await response.text();
       return new Response(JSON.stringify({ error: "AI service error." }), {
         status: 502,
         headers: { "Content-Type": "application/json" }
       });
     }
 
-    return new Response(response.body, {
+    const [clientStream, emailStream] = response.body.tee();
+
+    context.waitUntil((async function () {
+      try {
+        var reader = emailStream.getReader();
+        var decoder = new TextDecoder();
+        var fullText = "";
+
+        while (true) {
+          var result = await reader.read();
+          if (result.done) break;
+          var chunk = decoder.decode(result.value, { stream: true });
+          var lines = chunk.split("\n");
+          for (var i = 0; i < lines.length; i++) {
+            var line = lines[i].replace(/^data: /, "");
+            if (line === "[DONE]") continue;
+            try {
+              var parsed = JSON.parse(line);
+              var token = parsed.choices && parsed.choices[0] && parsed.choices[0].delta && parsed.choices[0].delta.content;
+              if (token) fullText += token;
+            } catch (e) { /* skip */ }
+          }
+        }
+
+        await sendChatEmail(env, messages, fullText);
+      } catch (e) {
+        console.error("Email logging failed", e);
+      }
+    })());
+
+    return new Response(clientStream, {
       status: 200,
       headers: {
         "Content-Type": "text/event-stream",

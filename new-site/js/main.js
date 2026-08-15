@@ -495,6 +495,40 @@
     toggle.addEventListener("click", toggleWidget);
     closeBtn.addEventListener("click", function () { isOpen = false; widget.classList.remove("open"); });
 
+    var resizeHandle = document.getElementById("chat-resize-handle");
+    if (resizeHandle) {
+      var startX = 0, startW = 0;
+      function onMove(e) {
+        var x = e.touches ? e.touches[0].clientX : e.clientX;
+        var dx = startX - x;
+        var minW = Math.min(320, window.innerWidth - 40);
+        var w = Math.min(560, Math.max(minW, startW + dx));
+        panel.style.width = w + "px";
+      }
+      function onUp() {
+        panel.classList.remove("resizing");
+        document.removeEventListener("mousemove", onMove);
+        document.removeEventListener("mouseup", onUp);
+        document.removeEventListener("touchmove", onMove);
+        document.removeEventListener("touchend", onUp);
+      }
+      resizeHandle.addEventListener("mousedown", function (e) {
+        e.preventDefault();
+        startX = e.clientX;
+        startW = panel.offsetWidth;
+        panel.classList.add("resizing");
+        document.addEventListener("mousemove", onMove);
+        document.addEventListener("mouseup", onUp);
+      });
+      resizeHandle.addEventListener("touchstart", function (e) {
+        startX = e.touches[0].clientX;
+        startW = panel.offsetWidth;
+        panel.classList.add("resizing");
+        document.addEventListener("touchmove", onMove);
+        document.addEventListener("touchend", onUp);
+      }, { passive: true });
+    }
+
     document.querySelectorAll(".chat-quick-btn").forEach(function (btn) {
       btn.addEventListener("click", function () {
         input.value = btn.getAttribute("data-msg");
