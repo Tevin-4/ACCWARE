@@ -603,7 +603,7 @@
         var angle = Math.atan2(dy, dx);
         var distance = Math.sqrt(dx * dx + dy * dy);
 
-        var maxDistance = 20;
+        var maxDistance = 5;
         var movement = Math.min(distance / 180, 1) * maxDistance;
 
         var x = Math.cos(angle) * movement;
