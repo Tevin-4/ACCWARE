@@ -576,8 +576,8 @@
     var pupils = document.querySelectorAll(".chat-pupil");
     if (!pupils.length) return;
 
-    var maxMoveX = 4;
-    var maxMoveY = 5;
+    var maxMoveX = 5;
+    var maxMoveY = 6;
 
     document.addEventListener("mousemove", function (e) {
       for (var i = 0; i < pupils.length; i++) {
@@ -590,7 +590,7 @@
         var dy = e.clientY - eyeCenterY;
         var angle = Math.atan2(dy, dx);
 
-        var dist = Math.min(Math.sqrt(dx * dx + dy * dy) / 12, 1);
+        var dist = Math.min(Math.sqrt(dx * dx + dy * dy) / 10, 1);
         var px = Math.cos(angle) * maxMoveX * dist;
         var py = Math.sin(angle) * maxMoveY * dist;
 
