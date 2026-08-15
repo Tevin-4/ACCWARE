@@ -576,47 +576,45 @@
     var pupils = document.querySelectorAll(".chat-pupil");
     if (!pupils.length) return;
 
-    var maxMove = 7;
-
-    function centerPupils() {
-      for (var i = 0; i < pupils.length; i++) {
-        var p = pupils[i];
-        var eye = p.parentElement;
-        var ew = eye.offsetWidth;
-        var eh = eye.offsetHeight;
-        var pw = p.offsetWidth;
-        var ph = p.offsetHeight;
-        p.style.left = ((ew - pw) / 2) + "px";
-        p.style.top = ((eh - ph) / 2) + "px";
-      }
-    }
-    centerPupils();
-    window.addEventListener("resize", centerPupils);
+    var mouseX = window.innerWidth / 2;
+    var mouseY = window.innerHeight / 2;
+    var currentX = mouseX;
+    var currentY = mouseY;
 
     document.addEventListener("mousemove", function (e) {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+    });
+
+    function animateEyes() {
+      currentX += (mouseX - currentX) * 0.08;
+      currentY += (mouseY - currentY) * 0.08;
+
       for (var i = 0; i < pupils.length; i++) {
         var eye = pupils[i].parentElement;
         var rect = eye.getBoundingClientRect();
-        var cx = rect.left + rect.width / 2;
-        var cy = rect.top + rect.height / 2;
 
-        var dx = e.clientX - cx;
-        var dy = e.clientY - cy;
-        var dist = Math.sqrt(dx * dx + dy * dy);
+        var eyeX = rect.left + rect.width / 2;
+        var eyeY = rect.top + rect.height / 2;
+
+        var dx = currentX - eyeX;
+        var dy = currentY - eyeY;
+
         var angle = Math.atan2(dy, dx);
-        var factor = Math.min(dist / 80, 1);
+        var distance = Math.sqrt(dx * dx + dy * dy);
 
-        var ox = Math.cos(angle) * maxMove * factor;
-        var oy = Math.sin(angle) * maxMove * factor;
+        var maxDistance = 20;
+        var movement = Math.min(distance / 180, 1) * maxDistance;
 
-        var pw = pupils[i].offsetWidth;
-        var ph = pupils[i].offsetHeight;
-        var baseX = (eye.offsetWidth - pw) / 2;
-        var baseY = (eye.offsetHeight - ph) / 2;
+        var x = Math.cos(angle) * movement;
+        var y = Math.sin(angle) * movement;
 
-        pupils[i].style.left = (baseX + ox) + "px";
-        pupils[i].style.top = (baseY + oy) + "px";
+        pupils[i].style.transform = "translate(calc(-50% + " + x + "px), calc(-50% + " + y + "px))";
       }
-    });
+
+      requestAnimationFrame(animateEyes);
+    }
+
+    animateEyes();
   })();
 })();
