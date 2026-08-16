@@ -1,0 +1,13 @@
+{
+  "name": "accware-site",
+  "private": true,
+  "scripts": {
+    "build:js": "terser js/main.js -o js/main.min.js -c -m",
+    "build:css": "cleancss css/styles.css -o css/styles.min.css",
+    "build": "npm run build:js && npm run build:css"
+  },
+  "devDependencies": {
+    "terser": "^5",
+    "clean-css-cli": "^5"
+  }
+}
