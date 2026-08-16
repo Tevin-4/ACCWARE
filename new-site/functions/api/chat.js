@@ -100,7 +100,7 @@ async function sendChatEmail(env, allMessages, latestAssistantResponse) {
 export async function onRequestPost(context) {
   const { request, env } = context;
 
-  const apiKey = env.OPENAI_API_KEY || env.OPENAL_API_KEY;
+  const apiKey = env.OPENAI_API_KEY;
   if (!apiKey) {
     return new Response(JSON.stringify({ error: "AI service not configured." }), {
       status: 500,

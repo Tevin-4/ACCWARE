@@ -3,8 +3,6 @@
 (function () {
   "use strict";
 
-  var ROOT = "."; // adjust if pages are nested deeper
-
   var NAV_LINKS = [
     { href: "index.html", label: "Home" },
     { href: "products.html", label: "Products" },
@@ -443,6 +441,136 @@
     });
   }
 
+  var CHAT_WIDGET_HTML = `
+  <div id="chat-widget" class="chat-widget">
+    <button class="chat-toggle" id="chat-toggle" aria-label="Chat with us">
+      <div class="chat-bubble-body">
+        <div class="chat-eyes">
+          <div class="chat-eye"><div class="chat-pupil"></div></div>
+          <div class="chat-eye"><div class="chat-pupil"></div></div>
+        </div>
+      </div>
+    </button>
+    <div class="chat-panel" id="chat-panel">
+      <div class="chat-resize-handle" id="chat-resize-handle"></div>
+      <div class="chat-header">
+        <div>
+          <strong>Accware Assistant</strong>
+          <span class="chat-status">Online</span>
+        </div>
+        <button class="chat-close-btn" id="chat-close" aria-label="Close chat">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" width="18" height="18"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        </button>
+      </div>
+      <div class="chat-messages" id="chat-messages">
+        <div class="chat-msg bot">
+          <p>Hi! I'm the Accware assistant. Ask me about our ERP products, services, or how to get started.</p>
+        </div>
+        <div class="chat-quick-replies">
+          <button class="chat-quick-btn" data-msg="What products do you offer?">What products do you offer?</button>
+          <button class="chat-quick-btn" data-msg="How do I get started with ERP?">How do I get started?</button>
+          <button class="chat-quick-btn" data-msg="What industries do you serve?">Industries you serve</button>
+        </div>
+      </div>
+      <form class="chat-input-area" id="chat-form">
+        <input type="text" id="chat-input" placeholder="Ask a question..." autocomplete="off" />
+        <button type="submit" class="chat-send" id="chat-send" aria-label="Send">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" width="18" height="18"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+        </button>
+      </form>
+    </div>
+  </div>`;
+
+  function injectChatWidget() {
+    if (document.getElementById("chat-widget")) return;
+    document.body.insertAdjacentHTML("beforeend", CHAT_WIDGET_HTML);
+  }
+
+  /* Animate ERP module cards into view on the home page. */
+  function initErpModules() {
+    var modules = document.querySelectorAll(".erp-module");
+    if (!modules.length) return;
+    modules.forEach(function (module, index) {
+      var isCentered = module.classList.contains("finance") || module.classList.contains("hr");
+      var base = isCentered ? "translateX(-50%) " : "";
+      module.style.opacity = "0";
+      module.style.transform = base + "scale(0.85)";
+      setTimeout(function () {
+        module.style.transition = "opacity 700ms ease, transform 700ms ease";
+        module.style.opacity = "1";
+        module.style.transform = base + "scale(1)";
+      }, 500 + index * 180);
+    });
+  }
+
+  /* Draw ERP connection lines from the core ring to each module's inner edge.
+     Uses the SVG screen transform so it stays correct at every viewport / aspect ratio. */
+  function initErpConnections() {
+    function run() {
+      var svg = document.querySelector(".erp-connections");
+      if (!svg) return;
+      var panel = svg.closest(".erp-animation");
+      var core = panel && panel.querySelector(".erp-core");
+      if (!core) return;
+      var ctm = svg.getScreenCTM();
+      if (!ctm) return;
+      var inv = ctm.inverse();
+      var cr = core.getBoundingClientRect();
+      var ccx = cr.left + cr.width / 2;
+      var ccy = cr.top + cr.height / 2;
+      var ring = svg.querySelector(".ring-outer");
+      var rPx = (ring ? parseFloat(ring.getAttribute("r")) : 105) * ctm.a;
+      var modules = panel.querySelectorAll(".erp-module");
+      var paths = svg.querySelectorAll(".connection");
+      var particles = svg.querySelectorAll(".data-particle animateMotion");
+      modules.forEach(function (m, i) {
+        var r = m.getBoundingClientRect();
+        var mcx = r.left + r.width / 2;
+        var mcy = r.top + r.height / 2;
+        var dx = mcx - ccx, dy = mcy - ccy;
+        var dlen = Math.hypot(dx, dy) || 1;
+        dx /= dlen; dy /= dlen;
+        var rx = ccx + dx * rPx, ry = ccy + dy * rPx;
+        var ex, ey;
+        if (mcx < ccx - 5) { ex = r.right; ey = mcy; }
+        else if (mcx > ccx + 5) { ex = r.left; ey = mcy; }
+        else { ex = mcx; ey = (mcy < ccy) ? r.bottom : r.top; }
+        function toUser(px, py) {
+          var pt = svg.createSVGPoint();
+          pt.x = px; pt.y = py;
+          return pt.matrixTransform(inv);
+        }
+        var R = toUser(rx, ry), E = toUser(ex, ey);
+        var dd = "M" + R.x.toFixed(1) + " " + R.y.toFixed(1) + " L" + E.x.toFixed(1) + " " + E.y.toFixed(1);
+        if (paths[i]) paths[i].setAttribute("d", dd);
+        if (particles[i]) particles[i].setAttribute("path", dd);
+      });
+    }
+    if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", run);
+    else run();
+    window.addEventListener("load", run);
+    window.addEventListener("resize", run);
+    setTimeout(run, 300);
+    setTimeout(run, 1200);
+    setTimeout(run, 2200);
+  }
+
+  /* Cycle the core text through a series of phrases with a fade transition. */
+  function initCoreRotator() {
+    var el = document.getElementById("coreRotator");
+    if (!el) return;
+    var phrases = ["Integrate", "Connect", "All In One Place"];
+    var i = 0;
+    setInterval(function () {
+      el.style.opacity = "0";
+      setTimeout(function () {
+        i = (i + 1) % phrases.length;
+        el.textContent = phrases[i];
+        el.style.opacity = "1";
+      }, 450);
+    }, 2200);
+  }
+
   /* ---------- AI Chat Widget ---------- */
   function initChatWidget() {
     var widget = document.getElementById("chat-widget");
@@ -478,7 +606,7 @@
       var div = document.createElement("div");
       div.className = "chat-typing";
       div.id = "chat-typing";
-      div.innerHTML = "<span></span><span></span><span></span>";
+      for (var s = 0; s < 3; s++) div.appendChild(document.createElement("span"));
       messages.appendChild(div);
       scrollToBottom();
     }
@@ -495,7 +623,7 @@
     }
 
     toggle.addEventListener("click", toggleWidget);
-    closeBtn.addEventListener("click", function () { isOpen = false; widget.classList.remove("open"); });
+    if (closeBtn) closeBtn.addEventListener("click", function () { isOpen = false; widget.classList.remove("open"); });
 
     var resizeHandle = document.getElementById("chat-resize-handle");
     if (resizeHandle) {
@@ -552,9 +680,9 @@
 
       var botDiv = document.createElement("div");
       botDiv.className = "chat-msg bot";
-      botDiv.innerHTML = "<p></p>";
       messages.appendChild(botDiv);
-      var pEl = botDiv.querySelector("p");
+      var pEl = document.createElement("p");
+      botDiv.appendChild(pEl);
       var fullText = "";
 
       fetch("/api/chat", {
@@ -605,7 +733,11 @@
     });
   }
 
+  injectChatWidget();
   initChatWidget();
+  initErpModules();
+  initErpConnections();
+  initCoreRotator();
 
   /* ---------- Eye Tracking ---------- */
   (function () {
@@ -616,6 +748,7 @@
     var mouseY = window.innerHeight / 2;
     var currentX = mouseX;
     var currentY = mouseY;
+    var rafId = null;
 
     document.addEventListener("mousemove", function (e) {
       mouseX = e.clientX;
@@ -623,6 +756,8 @@
     });
 
     function animateEyes() {
+      rafId = null;
+      if (document.hidden) return;
       currentX += (mouseX - currentX) * 0.08;
       currentY += (mouseY - currentY) * 0.08;
 
@@ -648,9 +783,17 @@
         pupils[i].style.transform = "translate(calc(-50% + " + x + "px), calc(-50% + " + y + "px))";
       }
 
-      requestAnimationFrame(animateEyes);
+      rafId = requestAnimationFrame(animateEyes);
     }
 
-    animateEyes();
+    function start() {
+      if (!rafId) rafId = requestAnimationFrame(animateEyes);
+    }
+
+    document.addEventListener("visibilitychange", function () {
+      if (!document.hidden) start();
+    });
+
+    start();
   })();
 })();
