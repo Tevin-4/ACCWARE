@@ -65,7 +65,8 @@
       if (link.children) {
         var childItems = link.children
           .map(function (c) {
-            return '<li><a href="' + c.href + '">' + c.label + "</a></li>";
+            var cCls = current === c.href ? ' class="active" aria-current="page"' : "";
+            return '<li><a href="' + c.href + '"' + cCls + ">" + c.label + "</a></li>";
           })
           .join("");
         return (
@@ -80,8 +81,9 @@
       var cls = current === link.href ? ' class="active" aria-current="page"' : "";
       return '<li><a href="' + link.href + '"' + cls + ">" + link.label + "</a></li>";
     });
+    var ctaCls = current === "reach-us.html" ? ' class="active" aria-current="page"' : "";
     items.push(
-      '<li class="nav-cta"><a class="btn btn-gold" href="reach-us.html">Get in Touch</a></li>'
+      '<li class="nav-cta"><a class="btn btn-gold"' + ctaCls + ' href="reach-us.html">Get in Touch</a></li>'
     );
     return items.join("");
   }
