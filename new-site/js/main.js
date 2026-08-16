@@ -577,6 +577,14 @@
     var isOpen = false;
     var isStreaming = false;
     var chatHistory = [];
+    var MAX_HISTORY = 20;
+
+    function pushHistory(msg) {
+      chatHistory.push(msg);
+      if (chatHistory.length > MAX_HISTORY) {
+        chatHistory = chatHistory.slice(-MAX_HISTORY);
+      }
+    }
 
     function scrollToBottom() {
       messages.scrollTop = messages.scrollHeight;
@@ -663,7 +671,7 @@
       if (!text || isStreaming) return;
 
       addMessage("user", text);
-      chatHistory.push({ role: "user", content: text });
+      pushHistory({ role: "user", content: text });
       input.value = "";
       sendBtn.disabled = true;
       isStreaming = true;
@@ -710,7 +718,7 @@
                 if (buffer) handleChunk("\n");
                 isStreaming = false;
                 sendBtn.disabled = false;
-                chatHistory.push({ role: "assistant", content: fullText });
+                pushHistory({ role: "assistant", content: fullText });
                 scrollToBottom();
                 return;
               }

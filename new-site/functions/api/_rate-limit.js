@@ -24,11 +24,16 @@ export async function checkRateLimit(env, ip, scope) {
 
   timestamps.push(now);
 
+  // Expire the key once the oldest retained timestamp rolls out of the window,
+  // so a stream of requests can't keep it alive indefinitely.
+  const oldest = timestamps[0];
+  const ttlSeconds = Math.max(60, Math.round((oldest + WINDOW_SECONDS * 1000 - now) / 1000));
+
   try {
     await env.RATE_LIMIT_KV.put(
       key,
       JSON.stringify(timestamps),
-      { expirationTtl: WINDOW_SECONDS + 30 }
+      { expirationTtl: ttlSeconds }
     );
   } catch (e) {
     console.error("KV write error", e);
