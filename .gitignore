@@ -4,6 +4,9 @@ node_modules/
 .idea/
 .wix/
 jsconfig.json
+.eslintrc.json
+render.yaml
+skills-lock.json
 
 # wrangler build/cache
 .wrangler/
@@ -11,6 +14,7 @@ new-site/.wrangler/
 
 # tooling / environment-specific (skills, caches, logs)
 .agents/
+.opencode/
 .playwright-mcp/
 wix-dev.log
 
