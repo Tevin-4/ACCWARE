@@ -10,6 +10,12 @@
   Cache-Control: no-cache, must-revalidate
   Content-Type: text/html; charset=utf-8
 
+/css/*
+  Content-Type: text/css; charset=utf-8
+
+/js/*
+  Content-Type: application/javascript; charset=utf-8
+
 /api/contact
   Cache-Control: no-store
   Content-Type: application/json
