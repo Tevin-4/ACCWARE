@@ -1,4 +1,4 @@
-/* Accware Solutions — shared site script: layout injection, nav, reveals, accordions */
+﻿/* Accware Solutions - shared site script: layout injection, nav, reveals, accordions */
 
 (function () {
   "use strict";
@@ -116,7 +116,7 @@
     el.insertAdjacentHTML("beforebegin",
       '<header class="site-header">' +
       '<div class="header-inner">' +
-      '<a class="brand" href="index.html" aria-label="Accware Solutions — home">' +
+      '<a class="brand" href="index.html" aria-label="Accware Solutions - home">' +
       '<img src="assets/logos/topbar%20design.webp" alt="Accware Solutions" />' +
       "</a>" +
       '<button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="primary-nav">' +
@@ -352,7 +352,7 @@
         .then(function (res) {
           if (res.ok && res.body && res.body.ok) {
             if (status) {
-              status.textContent = "Thank you — your message is on its way. We'll reply to " + data.email + " shortly.";
+              status.textContent = "Thank you - your message is on its way. We'll reply to " + data.email + " shortly.";
             }
             form.reset();
           } else {
@@ -361,7 +361,7 @@
         })
         .catch(function (err) {
           if (status) {
-            status.textContent = "Sorry — " + err.message + " Please email info@accware.ug directly.";
+            status.textContent = "Sorry - " + err.message + " Please email info@accware.ug directly.";
           }
         })
         .finally(function () {
