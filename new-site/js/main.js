@@ -53,7 +53,7 @@
         { href: "reach-us.html", label: "Contacts" },
         { href: "blog.html", label: "Blog" },
         { href: "privacy.html", label: "Privacy" },
-        { href: "https://www.linkedin.com/company/accware-solutions/about/", label: "LinkedIn", external: true }
+        { href: "https://www.linkedin.com/company/accware-solutions/about/", label: '<svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18" style="vertical-align:middle;margin-right:4px"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14zM8.5 10.5H6v7h2.5v-7zM7.25 9a1.25 1.25 0 1 0 0-2.5 1.25 1.25 0 0 0 0 2.5zM18 13.6c0-2-1.1-3.1-2.7-3.1-1.2 0-1.9.7-2.2 1.2V10.5H10.5v7H13v-3.7c0-1 .5-1.7 1.4-1.7.8 0 1.3.5 1.3 1.7V17.5H18v-3.9z"/></svg>LinkedIn', external: true }
       ]
     }
   ];
@@ -100,12 +100,6 @@
     return (
       '<div class="container">' +
       '<div class="footer-grid">' +
-      '<div class="footer-brand">' +
-      '<a href="index.html" style="display:inline-block;margin-bottom:16px;">' +
-      '<img src="assets/logos/topbar%20design.webp" alt="Accware Solutions" style="height:40px;width:auto;" />' +
-      '</a>' +
-      "<p>Your bridge to productive ERP solutions. Integrated business management applications that unify your workforce, process workflows and technology.</p>" +
-      "</div>" +
       cols +
       "</div>" +
       '<div class="footer-bottom">' +
