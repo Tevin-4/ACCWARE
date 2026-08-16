@@ -109,7 +109,7 @@ export async function onRequestPost(context) {
   }
 
   const ip = request.headers.get("CF-Connecting-IP") || request.headers.get("X-Forwarded-For") || "unknown";
-  if (await checkRateLimit(env, ip)) {
+  if (await checkRateLimit(env, ip, "chat")) {
     return rateLimitResponse();
   }
 
@@ -185,17 +185,29 @@ export async function onRequestPost(context) {
         var reader = emailStream.getReader();
         var decoder = new TextDecoder();
         var fullText = "";
+        var buffer = "";
 
         while (true) {
           var result = await reader.read();
           if (result.done) break;
-          var chunk = decoder.decode(result.value, { stream: true });
-          var lines = chunk.split("\n");
+          var text = decoder.decode(result.value, { stream: true });
+          var lines = (buffer + text).split("\n");
+          buffer = lines.pop();
           for (var i = 0; i < lines.length; i++) {
-            var line = lines[i].replace(/^data: /, "");
-            if (line === "[DONE]") continue;
+            var line = lines[i].replace(/^data: /, "").trim();
+            if (!line || line === "[DONE]") continue;
             try {
               var parsed = JSON.parse(line);
+              var token = parsed.choices && parsed.choices[0] && parsed.choices[0].delta && parsed.choices[0].delta.content;
+              if (token) fullText += token;
+            } catch (e) { /* skip */ }
+          }
+        }
+        if (buffer) {
+          var last = buffer.replace(/^data: /, "").trim();
+          if (last && last !== "[DONE]") {
+            try {
+              var parsed = JSON.parse(last);
               var token = parsed.choices && parsed.choices[0] && parsed.choices[0].delta && parsed.choices[0].delta.content;
               if (token) fullText += token;
             } catch (e) { /* skip */ }

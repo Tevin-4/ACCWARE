@@ -1,23 +1,35 @@
 const WINDOW_SECONDS = 600;
 const MAX_REQUESTS = 10;
 
-export async function checkRateLimit(env, ip) {
+export async function checkRateLimit(env, ip, scope) {
   if (!env.RATE_LIMIT_KV) return false;
 
-  var bucket = Math.floor(Date.now() / (WINDOW_SECONDS * 1000));
-  var key = "rl:" + ip + ":" + bucket;
+  const now = Date.now();
+  const windowStart = now - WINDOW_SECONDS * 1000;
+  const key = "rl:" + (scope || "default") + ":" + ip;
 
-  var count = 0;
+  let timestamps = [];
   try {
-    count = parseInt((await env.RATE_LIMIT_KV.get(key)) || "0", 10) || 0;
+    const raw = await env.RATE_LIMIT_KV.get(key);
+    if (raw) timestamps = JSON.parse(raw);
   } catch (e) {
     console.error("KV read error", e);
   }
 
-  if (count >= MAX_REQUESTS) return true;
+  // Drop entries outside the window (fail-open if parsing broke the array).
+  if (!Array.isArray(timestamps)) timestamps = [];
+  timestamps = timestamps.filter(function (t) { return t > windowStart; });
+
+  if (timestamps.length >= MAX_REQUESTS) return true;
+
+  timestamps.push(now);
 
   try {
-    await env.RATE_LIMIT_KV.put(key, String(count + 1), { expirationTtl: WINDOW_SECONDS });
+    await env.RATE_LIMIT_KV.put(
+      key,
+      JSON.stringify(timestamps),
+      { expirationTtl: WINDOW_SECONDS + 30 }
+    );
   } catch (e) {
     console.error("KV write error", e);
   }

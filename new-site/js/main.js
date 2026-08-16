@@ -686,30 +686,35 @@
           if (!response.ok) throw new Error("Service unavailable");
           var reader = response.body.getReader();
           var decoder = new TextDecoder();
+          var buffer = "";
+          function handleChunk(text) {
+            var lines = (buffer + text).split("\n");
+            buffer = lines.pop();
+            for (var i = 0; i < lines.length; i++) {
+              var line = lines[i].replace(/^data: /, "").trim();
+              if (!line || line === "[DONE]") continue;
+              try {
+                var parsed = JSON.parse(line);
+                var token = parsed.choices && parsed.choices[0] && parsed.choices[0].delta && parsed.choices[0].delta.content;
+                if (token) {
+                  fullText += token;
+                  pEl.textContent = fullText;
+                  scrollToBottom();
+                }
+              } catch (err) { /* skip malformed lines */ }
+            }
+          }
           function read() {
             return reader.read().then(function (result) {
               if (result.done) {
+                if (buffer) handleChunk("\n");
                 isStreaming = false;
                 sendBtn.disabled = false;
                 chatHistory.push({ role: "assistant", content: fullText });
                 scrollToBottom();
                 return;
               }
-              var chunk = decoder.decode(result.value, { stream: true });
-              var lines = chunk.split("\n");
-              for (var i = 0; i < lines.length; i++) {
-                var line = lines[i].replace(/^data: /, "");
-                if (line === "[DONE]") continue;
-                try {
-                  var parsed = JSON.parse(line);
-                  var token = parsed.choices && parsed.choices[0] && parsed.choices[0].delta && parsed.choices[0].delta.content;
-                  if (token) {
-                    fullText += token;
-                    pEl.textContent = fullText;
-                    scrollToBottom();
-                  }
-                } catch (err) { /* skip malformed lines */ }
-              }
+              handleChunk(decoder.decode(result.value, { stream: true }));
               return read();
             });
           }

@@ -26,7 +26,7 @@ export async function onRequestPost(context) {
     }
 
     const ip = request.headers.get("CF-Connecting-IP") || request.headers.get("X-Forwarded-For") || "unknown";
-    if (await checkRateLimit(env, ip)) {
+    if (await checkRateLimit(env, ip, "contact")) {
       return rateLimitResponse();
     }
 
