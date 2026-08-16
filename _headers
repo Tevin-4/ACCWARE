@@ -1,0 +1,1 @@
+Content-Security-Policy: default-src 'elf' https://fonts.gstatic.com https://fonts.googleapis.com https://www.linkedin.com; script-src 'elf' 'unsafe-inline' https://fonts.gstatic.com https://fonts.googleapis.com; style-src 'elf' 'unsafe-inline' https://fonts.googleapis.com; img-src 'elf' data: https://accware.ug; media-src 'elf' https://accware.ug; connect-src 'elf';
