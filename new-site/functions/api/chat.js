@@ -134,7 +134,10 @@ export async function onRequestPost(context) {
   const MAX_MSG_LEN = 4000;
   for (var i = 0; i < messages.length; i++) {
     var m = messages[i];
-    if (!m || typeof m.role !== "string" || typeof m.content !== "string" || m.content.length > MAX_MSG_LEN) {
+    if (
+      !m || typeof m.role !== "string" || typeof m.content !== "string" ||
+      (m.role !== "user" && m.role !== "assistant") || m.content.length > MAX_MSG_LEN
+    ) {
       return new Response(JSON.stringify({ error: "Invalid or too-long message." }), {
         status: 400,
         headers: { "Content-Type": "application/json" }

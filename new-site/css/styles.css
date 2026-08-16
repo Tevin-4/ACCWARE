@@ -729,6 +729,12 @@ h1, h2, h3, h4 { margin: 0; font-family: var(--font-display); line-height: 1.1; 
   height: 54px;
   width: auto;
 }
+.marquee--clients .marquee-track img {
+  transition: opacity 0.3s ease;
+}
+.marquee--clients .marquee-track img:hover {
+  opacity: 0.6;
+}
 
 /* ---------- Cards ---------- */
 .grid { display: grid; gap: 24px; }
