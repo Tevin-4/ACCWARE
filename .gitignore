@@ -8,3 +8,9 @@ jsconfig.json
 # wrangler build/cache
 .wrangler/
 new-site/.wrangler/
+
+# tooling / environment-specific (skills, caches, logs)
+.agents/
+.playwright-mcp/
+wix-dev.log
+
