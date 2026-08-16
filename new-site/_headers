@@ -8,14 +8,50 @@
 
 *.html
   Cache-Control: no-cache, must-revalidate
+  ! Content-Type
   Content-Type: text/html; charset=utf-8
 
 /css/*
+  ! Content-Type
   Content-Type: text/css; charset=utf-8
 
 /js/*
+  ! Content-Type
   Content-Type: application/javascript; charset=utf-8
+
+/assets/*.webp
+  ! Content-Type
+  Content-Type: image/webp
+
+/assets/*.jpg
+  ! Content-Type
+  Content-Type: image/jpeg
+
+/assets/*.jpeg
+  ! Content-Type
+  Content-Type: image/jpeg
+
+/assets/*.png
+  ! Content-Type
+  Content-Type: image/png
+
+/assets/*.mp4
+  ! Content-Type
+  Content-Type: video/mp4
+
+/assets/*.ico
+  ! Content-Type
+  Content-Type: image/x-icon
+
+/robots.txt
+  ! Content-Type
+  Content-Type: text/plain; charset=utf-8
+
+/sitemap.xml
+  ! Content-Type
+  Content-Type: application/xml; charset=utf-8
 
 /api/contact
   Cache-Control: no-store
+  ! Content-Type
   Content-Type: application/json
