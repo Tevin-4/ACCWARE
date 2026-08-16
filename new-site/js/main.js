@@ -58,7 +58,7 @@
     }
   ];
 
-  var current = document.body.getAttribute("data-page") || "";
+  var current = document.body.getAttribute("data-nav") || document.body.getAttribute("data-page") || "";
 
   function navMarkup() {
     var items = NAV_LINKS.map(function (link) {
