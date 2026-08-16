@@ -100,7 +100,7 @@
     return (
       '<div class="container">' +
       '<div class="footer-grid">' +
-      cols +
+      cols.join("") +
       "</div>" +
       '<div class="footer-bottom">' +
       "<div>© " + year + " Accware Solutions. All rights reserved.</div>" +
