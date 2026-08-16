@@ -726,7 +726,7 @@ h1, h2, h3, h4 { margin: 0; font-family: var(--font-display); line-height: 1.1; 
   animation: marqueeScroll 120s linear infinite;
 }
 .marquee-track img {
-  height: 44px;
+  height: 54px;
   width: auto;
 }
 
