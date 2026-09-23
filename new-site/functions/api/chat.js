@@ -47,13 +47,13 @@ BUSINESS FUNCTIONS:
 Financial Management, Order Management, Inventory Management, Project Accounting, Production Management, CRM, Payroll & HR, Equipment Maintenance & Service, eCommerce & POS, Reporting & Analytics.
 
 HOW TO GET STARTED:
-Visit https://accware.ug/reach-us.html or call +256 705 969313 for a free consultation.`;
+Fill out our contact form at https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=U_4-PbulJ0urp7zViit3RvKkOh0WsE5HqE0rgEPurvhURUEzM0NVRlkzSlZVU1ZHRlFMNlJGUUZKUC4u or call +256 705 969313 for a free consultation.`;
 
 const CONTACT_REQUEST = `\n\nFIRST INTERACTION RULE (IMPORTANT):\nAfter answering the user's very first question, you MUST add this exact message at the end of your response:\n\n"To better assist you, could you share your name and preferred contact method (phone number or email)? This will help us follow up if needed."\n\nDo NOT ask for contact info on subsequent messages — only after the first question.`;
 
-async function sendChatEmail(env, allMessages, latestAssistantResponse) {
+function sendChatEmail(env, allMessages, latestAssistantResponse) {
   const apiKey = env.RESEND_API_KEY;
-  if (!apiKey) return;
+  if (!apiKey) { console.error("[chat-email] RESEND_API_KEY missing"); return Promise.resolve(); }
 
   const from = env.FROM_EMAIL || "Accware Solutions <onboarding@resend.dev>";
   const to = env.TO_EMAIL || "info@accware.ug";
@@ -78,23 +78,28 @@ async function sendChatEmail(env, allMessages, latestAssistantResponse) {
   lines.push("Source: accware.ug chat widget");
   lines.push("Time: " + new Date().toISOString());
 
-  try {
-    await fetch("https://api.resend.com/emails", {
-      method: "POST",
-      headers: {
-        "Authorization": "Bearer " + apiKey,
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        from: from,
-        to: [to],
-        subject: "Chat Conversation — " + (allMessages[0]?.content || "New chat").substring(0, 60),
-        text: lines.join("\n")
-      })
-    });
-  } catch (e) {
-    console.error("Failed to send chat email", e);
-  }
+  return fetch("https://api.resend.com/emails", {
+    method: "POST",
+    headers: {
+      "Authorization": "Bearer " + apiKey,
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      from: from,
+      to: [to],
+      subject: "Chat Conversation — " + (allMessages[0]?.content || "New chat").substring(0, 60),
+      text: lines.join("\n")
+    })
+  }).then(function (res) {
+    if (!res.ok) {
+      return res.text().then(function (detail) {
+        console.error("[chat-email] Resend API error", res.status, detail);
+      });
+    }
+    console.log("[chat-email] Email sent OK");
+  }).catch(function (e) {
+    console.error("[chat-email] Failed to send", e);
+  });
 }
 
 export async function onRequestPost(context) {
@@ -178,49 +183,51 @@ export async function onRequestPost(context) {
       });
     }
 
-    const [clientStream, emailStream] = response.body.tee();
+    var chunks = [];
+    var reader = response.body.getReader();
+    var decoder = new TextDecoder();
+    var fullText = "";
+    var buffer = "";
 
-    context.waitUntil((async function () {
-      try {
-        var reader = emailStream.getReader();
-        var decoder = new TextDecoder();
-        var fullText = "";
-        var buffer = "";
-
-        while (true) {
-          var result = await reader.read();
-          if (result.done) break;
-          var text = decoder.decode(result.value, { stream: true });
-          var lines = (buffer + text).split("\n");
-          buffer = lines.pop();
-          for (var i = 0; i < lines.length; i++) {
-            var line = lines[i].replace(/^data: /, "").trim();
-            if (!line || line === "[DONE]") continue;
-            try {
-              var parsed = JSON.parse(line);
-              var token = parsed.choices && parsed.choices[0] && parsed.choices[0].delta && parsed.choices[0].delta.content;
-              if (token) fullText += token;
-            } catch (e) { /* skip */ }
-          }
-        }
-        if (buffer) {
-          var last = buffer.replace(/^data: /, "").trim();
-          if (last && last !== "[DONE]") {
-            try {
-              var parsed = JSON.parse(last);
-              var token = parsed.choices && parsed.choices[0] && parsed.choices[0].delta && parsed.choices[0].delta.content;
-              if (token) fullText += token;
-            } catch (e) { /* skip */ }
-          }
-        }
-
-        await sendChatEmail(env, messages, fullText);
-      } catch (e) {
-        console.error("Email logging failed", e);
+    while (true) {
+      var result = await reader.read();
+      if (result.done) break;
+      chunks.push(result.value);
+      var text = decoder.decode(result.value, { stream: true });
+      var lines = (buffer + text).split("\n");
+      buffer = lines.pop();
+      for (var i = 0; i < lines.length; i++) {
+        var line = lines[i].replace(/^data: /, "").trim();
+        if (!line || line === "[DONE]") continue;
+        try {
+          var parsed = JSON.parse(line);
+          var token = parsed.choices && parsed.choices[0] && parsed.choices[0].delta && parsed.choices[0].delta.content;
+          if (token) fullText += token;
+        } catch (e) { /* skip */ }
       }
-    })());
+    }
+    if (buffer) {
+      var last = buffer.replace(/^data: /, "").trim();
+      if (last && last !== "[DONE]") {
+        try {
+          var parsed = JSON.parse(last);
+          var token = parsed.choices && parsed.choices[0] && parsed.choices[0].delta && parsed.choices[0].delta.content;
+          if (token) fullText += token;
+        } catch (e) { /* skip */ }
+      }
+    }
 
-    return new Response(clientStream, {
+    console.log("[chat-email] Response buffered, length:", fullText.length);
+    var emailResult = await sendChatEmail(env, messages, fullText);
+
+    var streamBody = new ReadableStream({
+      start: function (controller) {
+        for (var i = 0; i < chunks.length; i++) controller.enqueue(chunks[i]);
+        controller.close();
+      }
+    });
+
+    return new Response(streamBody, {
       status: 200,
       headers: {
         "Content-Type": "text/event-stream",

@@ -23,7 +23,15 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700;800&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=optional" rel="stylesheet" />
-  <link rel="stylesheet" href="css/styles.min.css?v=39" />
+  <link rel="stylesheet" href="css/styles.min.css?v=58" />
+  <link rel="preconnect" href="https://unpkg.com" crossorigin />
+  <script type="importmap">
+{ "imports": {
+  "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+  "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+}}
+</script>
+  <link rel="stylesheet" href="css/erp-animation.css?v=8" />
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -62,7 +70,7 @@
     <a href="resources.html" style="color:#ff8055;">Resources</a> &nbsp;
     <a href="about.html" style="color:#ff8055;">About</a> &nbsp;
     <a href="blog.html" style="color:#ff8055;">Blog</a> &nbsp;
-    <a href="reach-us.html" style="color:#ff8055;">Contact</a>
+    <a href="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=U_4-PbulJ0urp7zViit3RvKkOh0WsE5HqE0rgEPurvhURUEzM0NVRlkzSlZVU1ZHRlFMNlJGUUZKUC4u" style="color:#ff8055;">Contact</a>
   </div>
 </noscript>
 
@@ -71,6 +79,45 @@
   <main>
     <!-- ================= HERO ================= -->
     <section class="hero">
+      <div id="scrim" aria-hidden="true"></div>
+      <div id="glow" aria-hidden="true"></div>
+      <div id="ui">
+        <svg id="link" aria-hidden="true">
+          <path id="linkPath" />
+          <circle id="linkDot" r="3" />
+        </svg>
+        <div class="a3d-card" id="intro">
+          <h2>One system. Every business function.</h2>
+          <p>Watch the platform assemble</p>
+        </div>
+        <div class="a3d-card" id="outro">
+          <h2>Everything connected.</h2>
+          <p>With Accware Solutions join the community</p>
+        </div>
+        <div id="fade" aria-hidden="true"></div>
+      </div>
+      <section id="panel" aria-hidden="true">
+        <div class="row r1 p-eyebrow"><span class="dot"></span></div>
+        <h2 class="row r2" id="title"></h2>
+        <p class="row r3" id="tagline"></p>
+        <ul class="row r4" id="bullets"></ul>
+      </section>
+
+      <div class="sr-only">
+        <h2>The Accware ERP platform</h2>
+        <p>One system covering every business function:</p>
+        <ul>
+          <li><strong>Finance</strong> - live financial reporting, invoices, payments and reconciliation, multi-currency and tax ready.</li>
+          <li><strong>Sales</strong> - CRM and pipeline tracking, quotes to invoices, customer activity in one view.</li>
+          <li><strong>Operations</strong> - workflow and approvals, process visibility, vendor and operational management.</li>
+          <li><strong>Analytics</strong> - live dashboards, custom reports, performance insights.</li>
+          <li><strong>HR</strong> - employee records, leave and attendance, performance visibility.</li>
+          <li><strong>Inventory</strong> - stock visibility, multi-location inventory, reorder and movement tracking.</li>
+          <li><strong>Projects</strong> - planning and milestones, time and budget tracking, project visibility.</li>
+          <li><strong>CRM</strong> - customer profiles, interactions and follow-ups, connected sales activity.</li>
+        </ul>
+      </div>
+
       <div class="container hero-grid">
         <div class="hero-copy">
           <p class="eyebrow reveal">ERP Software Solutions - Kampala, Uganda</p>
@@ -81,99 +128,12 @@
           </p>
           <div class="hero-actions reveal reveal-delay-2">
             <a class="btn btn-gold" href="products.html">Explore Products <span class="arrow">→</span></a>
-            <a class="btn btn-outline" href="reach-us.html">Talk to an Expert</a>
+            <a class="btn btn-outline" href="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=U_4-PbulJ0urp7zViit3RvKkOh0WsE5HqE0rgEPurvhURUEzM0NVRlkzSlZVU1ZHRlFMNlJGUUZKUC4u">Talk to an Expert</a>
           </div>
           <div class="trust-row reveal reveal-delay-3">
             <span class="trust-item"><picture><source srcset="assets/logos/gold-cert.webp" type="image/webp"><img width="200" height="90" loading="lazy" src="assets/logos/gold-cert.png" alt="Gold Certification" /></picture><strong>Gold Certified</strong> Acumatica Partner</span>
             <span class="trust-item"><picture><source srcset="assets/logos/microsoft-partner.webp" type="image/webp"><img width="200" height="90" loading="lazy" src="assets/logos/microsoft-partner.jpg" alt="Microsoft Partner" /></picture><strong>Microsoft</strong> Partner</span>
           </div>
-        </div>
-
-        <div class="erp-animation reveal reveal-delay-2" aria-hidden="true">
-          <svg class="erp-connections" viewBox="0 0 700 520" preserveAspectRatio="xMidYMid meet">
-
-            <!-- Connection paths: ring-outer edge - module inner edge -->
-            <path class="connection" d="M350 174 L350 131" />
-            <path class="connection" d="M270 228 L223 214" />
-            <path class="connection" d="M430 228 L477 214" />
-            <path class="connection" d="M264 264 L201 234" />
-            <path class="connection" d="M436 264 L498 234" />
-            <path class="connection" d="M274 300 L237 327" />
-            <path class="connection" d="M426 300 L463 327" />
-            <path class="connection" d="M350 346 L350 420" />
-
-            <!-- Animated data particles -->
-            <circle class="data-particle p1" r="4">
-              <animateMotion dur="2.5s" repeatCount="indefinite" path="M350 174 L350 131" />
-            </circle>
-            <circle class="data-particle p2" r="4">
-              <animateMotion dur="3s" repeatCount="indefinite" path="M270 228 L223 214" />
-            </circle>
-            <circle class="data-particle p3" r="4">
-              <animateMotion dur="2.7s" repeatCount="indefinite" path="M430 228 L477 214" />
-            </circle>
-            <circle class="data-particle p4" r="4">
-              <animateMotion dur="3.2s" repeatCount="indefinite" path="M264 264 L201 234" />
-            </circle>
-            <circle class="data-particle p5" r="4">
-              <animateMotion dur="2.8s" repeatCount="indefinite" path="M436 264 L498 234" />
-            </circle>
-            <circle class="data-particle p6" r="4">
-              <animateMotion dur="3.1s" repeatCount="indefinite" path="M274 300 L237 327" />
-            </circle>
-            <circle class="data-particle p7" r="4">
-              <animateMotion dur="2.9s" repeatCount="indefinite" path="M426 300 L463 327" />
-            </circle>
-            <circle class="data-particle p8" r="4">
-              <animateMotion dur="3.4s" repeatCount="indefinite" path="M350 346 L350 420" />
-            </circle>
-
-            <!-- Core rings -->
-            <circle class="core-ring ring-outer" cx="350" cy="260" r="105" />
-            <circle class="core-ring ring-middle" cx="350" cy="260" r="82" />
-            <circle class="core-ring ring-inner" cx="350" cy="260" r="65" />
-          </svg>
-
-          <!-- Central ERP -->
-          <div class="erp-core">
-            <div class="core-pulse"></div>
-            <div class="core-rotator" id="coreRotator">Integrate</div>
-          </div>
-
-          <!-- Module cards -->
-          <div class="erp-module finance">
-            <div class="module-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" width="20" height="20"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
-            <div><strong>FINANCE</strong><small>Real-time visibility</small></div>
-          </div>
-          <div class="erp-module sales">
-            <div class="module-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" width="20" height="20"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
-            <div><strong>SALES</strong><small>Orders & customers</small></div>
-          </div>
-          <div class="erp-module inventory">
-            <div class="module-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" width="20" height="20"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg></div>
-            <div><strong>INVENTORY</strong><small>Stock in real time</small></div>
-          </div>
-          <div class="erp-module crm">
-            <div class="module-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" width="20" height="20"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
-            <div><strong>CRM</strong><small>Customer relationships</small></div>
-          </div>
-          <div class="erp-module operations">
-            <div class="module-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" width="20" height="20"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></div>
-            <div><strong>OPERATIONS</strong><small>Workflows & processes</small></div>
-          </div>
-          <div class="erp-module projects">
-            <div class="module-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" width="20" height="20"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg></div>
-            <div><strong>PROJECTS</strong><small>Plan & deliver</small></div>
-          </div>
-          <div class="erp-module analytics">
-            <div class="module-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" width="20" height="20"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div>
-            <div><strong>ANALYTICS</strong><small>Business intelligence</small></div>
-          </div>
-          <div class="erp-module hr">
-            <div class="module-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" width="20" height="20"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
-            <div><strong>HR</strong><small>People & performance</small></div>
-          </div>
-
         </div>
       </div>
     </section>
@@ -386,7 +346,7 @@
         <h2 class="section-title">Ready to move your business forward?</h2>
         <p>Talk to a certified consultant about the right ERP foundation for your organisation - no obligation, just honest guidance.</p>
         <div class="cta-actions">
-          <a class="btn btn-gold" href="reach-us.html">Get in Touch <span class="arrow">→</span></a>
+          <a class="btn btn-gold" href="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=U_4-PbulJ0urp7zViit3RvKkOh0WsE5HqE0rgEPurvhURUEzM0NVRlkzSlZVU1ZHRlFMNlJGUUZKUC4u">Get in Touch <span class="arrow">→</span></a>
           <a class="btn btn-outline" href="services.html">Explore Services</a>
         </div>
       </div>
@@ -396,7 +356,16 @@
   <div id="site-footer"></div>
 
   
-  <script src="js/main.min.js?v=17"></script>
+  <script>
+    // 3D hero animation: desktop-only for now (mobile layout TBD)
+    if (!matchMedia("(max-width: 820px)").matches) {
+      var a3dScript = document.createElement("script");
+      a3dScript.type = "module";
+      a3dScript.src = "js/erp-animation.js?v=6";
+      document.body.appendChild(a3dScript);
+    }
+  </script>
+  <script src="js/main.min.js?v=21"></script>
 </body>
 </html>
 

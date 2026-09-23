@@ -50,10 +50,16 @@
       title: "Company",
       links: [
         { href: "about.html", label: "About" },
-        { href: "reach-us.html", label: "Contacts" },
+        { href: "https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=U_4-PbulJ0urp7zViit3RvKkOh0WsE5HqE0rgEPurvhURUEzM0NVRlkzSlZVU1ZHRlFMNlJGUUZKUC4u", label: "Contacts" },
         { href: "blog.html", label: "Blog" },
-        { href: "privacy.html", label: "Privacy" },
-        { href: "https://www.linkedin.com/company/accware-solutions/about/", label: '<svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18" style="vertical-align:middle;margin-right:4px"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14zM8.5 10.5H6v7h2.5v-7zM7.25 9a1.25 1.25 0 1 0 0-2.5 1.25 1.25 0 0 0 0 2.5zM18 13.6c0-2-1.1-3.1-2.7-3.1-1.2 0-1.9.7-2.2 1.2V10.5H10.5v7H13v-3.7c0-1 .5-1.7 1.4-1.7.8 0 1.3.5 1.3 1.7V17.5H18v-3.9z"/></svg>LinkedIn', external: true }
+        { href: "privacy.html", label: "Privacy" }
+      ]
+    },
+    {
+      title: "Socials",
+      links: [
+        { href: "https://www.linkedin.com/company/accware-solutions/about/", label: '<svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18" style="vertical-align:middle;margin-right:4px"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14zM8.5 10.5H6v7h2.5v-7zM7.25 9a1.25 1.25 0 1 0 0-2.5 1.25 1.25 0 0 0 0 2.5zM18 13.6c0-2-1.1-3.1-2.7-3.1-1.2 0-1.9.7-2.2 1.2V10.5H10.5v7H13v-3.7c0-1 .5-1.7 1.4-1.7.8 0 1.3.5 1.3 1.7V17.5H18v-3.9z"/></svg>LinkedIn', external: true },
+        { href: "https://www.facebook.com/AccwareSolutions", label: '<svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18" style="vertical-align:middle;margin-right:4px"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>Facebook', external: true }
       ]
     }
   ];
@@ -83,7 +89,7 @@
     });
     var ctaCls = current === "reach-us.html" ? ' class="active" aria-current="page"' : "";
     items.push(
-      '<li class="nav-cta"><a class="btn btn-gold"' + ctaCls + ' href="reach-us.html">Get in Touch</a></li>'
+      '<li class="nav-cta"><a class="btn btn-gold"' + ctaCls + ' href="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=U_4-PbulJ0urp7zViit3RvKkOh0WsE5HqE0rgEPurvhURUEzM0NVRlkzSlZVU1ZHRlFMNlJGUUZKUC4u">Get in Touch</a></li>'
     );
     return items.join("");
   }
@@ -106,7 +112,7 @@
       "</div>" +
       '<div class="footer-bottom">' +
       "<div>© " + year + " Accware Solutions. All rights reserved.</div>" +
-      '<div><a href="privacy.html">Privacy</a> · <a href="reach-us.html">Contact</a> · <a href="https://selfservice.accware.ug:8443/" target="_blank" rel="noopener">Support Portal</a></div>' +
+      '<div><a href="privacy.html">Privacy</a> · <a href="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=U_4-PbulJ0urp7zViit3RvKkOh0WsE5HqE0rgEPurvhURUEzM0NVRlkzSlZVU1ZHRlFMNlJGUUZKUC4u">Contact</a> · <a href="https://selfservice.accware.ug:8443/" target="_blank" rel="noopener">Support Portal</a></div>' +
       "</div>" +
       "</div>"
     );
@@ -128,7 +134,7 @@
       '<nav id="primary-nav" class="primary-nav" aria-label="Main navigation"><ul>' +
       navMarkup() +
       "</ul></nav>" +
-      '<a class="header-cta btn btn-gold" href="reach-us.html">Get in Touch</a>' +
+      '<a class="header-cta btn btn-gold" href="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=U_4-PbulJ0urp7zViit3RvKkOh0WsE5HqE0rgEPurvhURUEzM0NVRlkzSlZVU1ZHRlFMNlJGUUZKUC4u">Get in Touch</a>' +
       "</div>" +
       "</div>" +
       "</header>" +
@@ -427,13 +433,6 @@
   initCounters();
   initContactForm();
 
-  // Pause SMIL particle motion for users who prefer reduced motion
-  if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-    document.querySelectorAll(".erp-connections").forEach(function (svg) {
-      if (svg.pauseAnimations) svg.pauseAnimations();
-    });
-  }
-
   var CHAT_WIDGET_HTML = `
   <div id="chat-widget" class="chat-widget">
     <button class="chat-toggle" id="chat-toggle" aria-label="Chat with us">
@@ -479,91 +478,6 @@
     document.body.insertAdjacentHTML("beforeend", CHAT_WIDGET_HTML);
   }
 
-  /* Animate ERP module cards into view on the home page. */
-  function initErpModules() {
-    var modules = document.querySelectorAll(".erp-module");
-    if (!modules.length) return;
-    modules.forEach(function (module, index) {
-      var isCentered = module.classList.contains("finance") || module.classList.contains("hr");
-      var base = isCentered ? "translateX(-50%) " : "";
-      module.style.opacity = "0";
-      module.style.transform = base + "scale(0.85)";
-      setTimeout(function () {
-        module.style.transition = "opacity 700ms ease, transform 700ms ease";
-        module.style.opacity = "1";
-        module.style.transform = base + "scale(1)";
-      }, 500 + index * 180);
-    });
-  }
-
-  /* Draw ERP connection lines from the core ring to each module's inner edge.
-     Uses the SVG screen transform so it stays correct at every viewport / aspect ratio. */
-  function initErpConnections() {
-    function run() {
-      var svg = document.querySelector(".erp-connections");
-      if (!svg) return;
-      var panel = svg.closest(".erp-animation");
-      var core = panel && panel.querySelector(".erp-core");
-      if (!core) return;
-      var ctm = svg.getScreenCTM();
-      if (!ctm) return;
-      var inv = ctm.inverse();
-      var cr = core.getBoundingClientRect();
-      var ccx = cr.left + cr.width / 2;
-      var ccy = cr.top + cr.height / 2;
-      var ring = svg.querySelector(".ring-outer");
-      var rPx = (ring ? parseFloat(ring.getAttribute("r")) : 105) * ctm.a;
-      var modules = panel.querySelectorAll(".erp-module");
-      var paths = svg.querySelectorAll(".connection");
-      var particles = svg.querySelectorAll(".data-particle animateMotion");
-      modules.forEach(function (m, i) {
-        var r = m.getBoundingClientRect();
-        var mcx = r.left + r.width / 2;
-        var mcy = r.top + r.height / 2;
-        var dx = mcx - ccx, dy = mcy - ccy;
-        var dlen = Math.hypot(dx, dy) || 1;
-        dx /= dlen; dy /= dlen;
-        var rx = ccx + dx * rPx, ry = ccy + dy * rPx;
-        var ex, ey;
-        if (mcx < ccx - 5) { ex = r.right; ey = mcy; }
-        else if (mcx > ccx + 5) { ex = r.left; ey = mcy; }
-        else { ex = mcx; ey = (mcy < ccy) ? r.bottom : r.top; }
-        function toUser(px, py) {
-          var pt = svg.createSVGPoint();
-          pt.x = px; pt.y = py;
-          return pt.matrixTransform(inv);
-        }
-        var R = toUser(rx, ry), E = toUser(ex, ey);
-        var dd = "M" + R.x.toFixed(1) + " " + R.y.toFixed(1) + " L" + E.x.toFixed(1) + " " + E.y.toFixed(1);
-        if (paths[i]) paths[i].setAttribute("d", dd);
-        if (particles[i]) particles[i].setAttribute("path", dd);
-      });
-    }
-    if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", run);
-    else run();
-    window.addEventListener("load", run);
-    window.addEventListener("resize", run);
-    setTimeout(run, 300);
-    setTimeout(run, 1200);
-    setTimeout(run, 2200);
-  }
-
-  /* Cycle the core text through a series of phrases with a fade transition. */
-  function initCoreRotator() {
-    var el = document.getElementById("coreRotator");
-    if (!el) return;
-    var phrases = ["Integrate", "Connect", "All In One Place"];
-    var i = 0;
-    setInterval(function () {
-      el.style.opacity = "0";
-      setTimeout(function () {
-        i = (i + 1) % phrases.length;
-        el.textContent = phrases[i];
-        el.style.opacity = "1";
-      }, 450);
-    }, 2200);
-  }
-
   /* ---------- AI Chat Widget ---------- */
   function initChatWidget() {
     var widget = document.getElementById("chat-widget");
@@ -584,7 +498,7 @@
     function pushHistory(msg) {
       chatHistory.push(msg);
       if (chatHistory.length > MAX_HISTORY) {
-        chatHistory = chatHistory.slice(-MAX_HISTORY);
+        chatHistory = chatHistory.slice(-20);
       }
     }
 
@@ -741,9 +655,6 @@
 
   injectChatWidget();
   initChatWidget();
-  initErpModules();
-  initErpConnections();
-  initCoreRotator();
 
   /* ---------- Eye Tracking ---------- */
   (function () {
