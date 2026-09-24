@@ -201,7 +201,7 @@ function layout() {
     const vwPx = viewport.clientWidth;
     const cr = heroCopyEl ? heroCopyEl.getBoundingClientRect().right : 0;
     const copyFrac = vwPx ? cr / vwPx : 0.45;
-    const capMax = narrow ? 0.66 : 0.72;
+    const capMax = 0.66;
     const frac = (copyFrac > 0.05 && copyFrac < 0.70)
       ? Math.min(capMax, Math.max(0.55, (copyFrac + 1) / 2))
       : (narrow ? 0.60 : 0.63);
@@ -329,7 +329,31 @@ function evaluate(t) {
     intro.style.left = ax; intro.style.top = ay;
     outro.style.left = ax; outro.style.top = ay;
   }
-  if (active >= 0 && !mobile) drawLink(cells[active].mesh);
+  if (active >= 0 && !mobile) {
+    // panel follows the focal cube: fixed gap right of its projected edge,
+    // vertically centred on it, clamped so the text never hugs the right edge
+    const m = cells[active].mesh;
+    const hs = CUBE / 2;
+    let minX = 1e9, maxX = -1e9, minY = 1e9, maxY = -1e9;
+    for (let i = 0; i < 8; i++) {
+      _v.set(i & 1 ? hs : -hs, i & 2 ? hs : -hs, i & 4 ? hs : -hs)
+        .applyEuler(m.rotation).multiplyScalar(m.scale.x);
+      _corner.set(stage.position.x + m.position.x + _v.x,
+        stage.position.y + m.position.y + _v.y,
+        stage.position.z + m.position.z + _v.z).project(camera);
+      const px = (_corner.x * .5 + .5) * viewport.clientWidth;
+      const py = (-_corner.y * .5 + .5) * viewport.clientHeight;
+      if (px < minX) minX = px;
+      if (px > maxX) maxX = px;
+      if (py < minY) minY = py;
+      if (py > maxY) maxY = py;
+    }
+    const pw = Math.min(280, viewport.clientWidth * 0.175);
+    panel.style.left = Math.min(maxX + 48, viewport.clientWidth - pw - 32) + 'px';
+    panel.style.top = ((minY + maxY) / 2) + 'px';
+    updateAnchor();
+    drawLink(m);
+  }
 }
 
 /* ============================================================
@@ -396,7 +420,7 @@ const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
 addEventListener('pointermove', e => {
   const r = viewport.getBoundingClientRect();
   if (!r.width) return;
-  target.set(((e.clientX - r.left) / r.width - .5) * 1.1, -((e.clientY - r.top) / r.height - .5) * 0.7);
+  target.set(((e.clientX - r.left) / r.width - .5) * 0.8, -((e.clientY - r.top) / r.height - .5) * 0.7);
 });
 
 let time = 0, playing = true, last = performance.now(), heroVisible = true;
