@@ -38,7 +38,7 @@
   position: absolute;
   inset: 0;
   pointer-events: none;
-  z-index: 2;
+  z-index: 1;
   overflow: hidden;
 }
 
@@ -248,10 +248,32 @@
   /* 3D animation disabled on mobile for now (mobile layout TBD):
      the hero falls back to the site's standard dark hero */
   #ui, #panel, #scrim, #glow { display: none; }
+  .hero {
+    background: #000;
+  }
+  #mobile-particles {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    z-index: 3;
+    pointer-events: none;
+  }
 }
 
 /* hero text layer above Three.js canvas */
 .hero > .container { position: relative; z-index: 4; }
+
+#mobile-particles {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  z-index: 2;
+  pointer-events: none;
+}
 
 /* ================= REDUCED MOTION ================= */
 @media (prefers-reduced-motion: reduce) {
