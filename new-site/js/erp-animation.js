@@ -460,13 +460,6 @@ if ('IntersectionObserver' in window) {
     .observe(document.querySelector('.hero'));
 }
 
-if (reduceMotion) {
-  // start on the assembled cube (intro caption up) instead of jumping mid-tour;
-  // clicking play runs the break-into-particles sequence from the top
-  time = TL.explodeStart - 0.4;
-  setPlaying(false);
-}
-
 renderer.setAnimationLoop(now => {
   const rawDt = (now - last) / 1000; last = now;
   const dt = Math.min(rawDt, 0.25);
