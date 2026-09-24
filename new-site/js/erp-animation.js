@@ -222,7 +222,7 @@ function layout() {
    8. ANIMATION
    ============================================================ */
 const _v = new THREE.Vector3(), _corner = new THREE.Vector3();
-let activeIndex = -1;
+let activeIndex = -1, panelPlacedFor = -1;
 
 function evaluate(t) {
   const ce = ease.inOutCubic(seg(t, 0, TL.camMove));
@@ -330,29 +330,22 @@ function evaluate(t) {
     outro.style.left = ax; outro.style.top = ay;
   }
   if (active >= 0 && !mobile) {
-    // panel follows the focal cube: fixed gap right of its projected edge,
-    // vertically centred on it, clamped so the text never hugs the right edge
-    const m = cells[active].mesh;
-    const hs = CUBE / 2;
-    let minX = 1e9, maxX = -1e9, minY = 1e9, maxY = -1e9;
-    for (let i = 0; i < 8; i++) {
-      _v.set(i & 1 ? hs : -hs, i & 2 ? hs : -hs, i & 4 ? hs : -hs)
-        .applyEuler(m.rotation).multiplyScalar(m.scale.x);
-      _corner.set(stage.position.x + m.position.x + _v.x,
-        stage.position.y + m.position.y + _v.y,
-        stage.position.z + m.position.z + _v.z).project(camera);
-      const px = (_corner.x * .5 + .5) * viewport.clientWidth;
-      const py = (-_corner.y * .5 + .5) * viewport.clientHeight;
-      if (px < minX) minX = px;
-      if (px > maxX) maxX = px;
-      if (py < minY) minY = py;
-      if (py > maxY) maxY = py;
+    // panel is placed ONCE per feature, at the cube's focal slot with a
+    // rotation-invariant (corner-on) bound: the text stays completely still
+    // while the cube spins, bobs and drifts
+    if (panelPlacedFor !== active) {
+      panelPlacedFor = active;
+      _corner.set(stage.position.x + L.focal.x, stage.position.y + L.focal.y, stage.position.z + L.focal.z).project(camera);
+      const cx = (_corner.x * .5 + .5) * viewport.clientWidth;
+      const cy = (-_corner.y * .5 + .5) * viewport.clientHeight;
+      const r = Math.sqrt(3) * (CUBE / 2) * L.focalScale * viewport.clientHeight
+        / (2 * Math.tan(THREE.MathUtils.degToRad(camera.fov / 2)) * (CAM_DIST - L.focal.z));
+      const pw = Math.min(280, viewport.clientWidth * 0.175);
+      panel.style.left = Math.min(cx + r + 48, viewport.clientWidth - pw - 32) + 'px';
+      panel.style.top = cy + 'px';
+      updateAnchor();
     }
-    const pw = Math.min(280, viewport.clientWidth * 0.175);
-    panel.style.left = Math.min(maxX + 48, viewport.clientWidth - pw - 32) + 'px';
-    panel.style.top = ((minY + maxY) / 2) + 'px';
-    updateAnchor();
-    drawLink(m);
+    drawLink(cells[active].mesh);
   }
 }
 
@@ -380,7 +373,7 @@ function updateAnchor() {
 
 function syncPanel(i) {
   clearTimeout(swapTimer);
-  if (i < 0) { panel.classList.remove('show'); linkEl.classList.remove('show'); return; }
+  if (i < 0) { panelPlacedFor = -1; panel.classList.remove('show'); linkEl.classList.remove('show'); return; }
   const f = FEATURES[i], hex = '#' + (f.color & 0xFFFFFF).toString(16).padStart(6, '0');
   panel.classList.remove('show');
   swapTimer = setTimeout(() => {
@@ -454,6 +447,7 @@ function resize() {
   renderer.setSize(size.width, size.height);
   composer.setSize(size.width, size.height);
   bloom.enabled = size.width >= 820 && !bloomKilled;
+  panelPlacedFor = -1;
   layout();
   updateAnchor();
 }
@@ -467,7 +461,9 @@ if ('IntersectionObserver' in window) {
 }
 
 if (reduceMotion) {
-  time = TL.revealStart + TL.step * 2 + TL.rise + TL.hold * 0.5;
+  // start on the assembled cube (intro caption up) instead of jumping mid-tour;
+  // clicking play runs the break-into-particles sequence from the top
+  time = TL.explodeStart - 0.4;
   setPlaying(false);
 }
 
