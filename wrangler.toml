@@ -1,0 +1,8 @@
+name = "accware"
+pages_build_output_dir = "new-site"
+
+# Use with:
+# npx wrangler pages deploy new-site --project-name accware
+# or
+# npx wrangler pages deploy --project-name accware
+
