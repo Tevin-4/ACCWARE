@@ -4,14 +4,14 @@
   const ctx = canvas.getContext('2d', { alpha: true });
   let w = 0, h = 0, dpr = 1;
   const particles = [];
-  const COUNT = 80;
-  const SPEED = 0.25;
+  const COUNT = 120;
+  const SPEED = 0.35;
   const BRAND = '#f44a22';
 
   function resize() {
     dpr = Math.min(window.devicePixelRatio || 1, 2);
-    w = canvas.clientWidth;
-    h = canvas.clientHeight;
+    w = canvas.clientWidth || window.innerWidth;
+    h = canvas.clientHeight || window.innerHeight;
     canvas.width = w * dpr;
     canvas.height = h * dpr;
     ctx.setTransform(dpr,0,0,dpr,0,0);
@@ -27,8 +27,8 @@
         y: random(0,h),
         vx: random(-SPEED,SPEED),
         vy: random(-SPEED,SPEED),
-        r: random(0.8,2.2),
-        a: random(0.15,0.45)
+        r: random(1.2,2.8),
+        a: random(0.4,0.9)
       });
     }
   }
@@ -49,7 +49,7 @@
         const dy = p.y - q.y;
         const dist = Math.hypot(dx,dy);
         if (dist < 120) {
-          ctx.strokeStyle = `rgba(244,74,34,${0.12*(1 - dist/120)})`;
+          ctx.strokeStyle = `rgba(244,74,34,${0.25*(1 - dist/120)})`;
           ctx.lineWidth = 0.6;
           ctx.beginPath();
           ctx.moveTo(p.x,p.y);
