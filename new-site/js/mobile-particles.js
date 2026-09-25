@@ -5,7 +5,7 @@
   let w = 0, h = 0, dpr = 1;
   const particles = [];
   const COUNT = 120;
-  const SPEED = 0.35;
+  const SPEED = 0.15;
   const BRAND = '#f44a22';
 
   function resize() {
