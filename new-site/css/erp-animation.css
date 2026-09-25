@@ -265,6 +265,10 @@
 /* hero text layer above Three.js canvas */
 .hero > .container { position: relative; z-index: 6; }
 
+.hero {
+  background: #000 !important;
+}
+
 #mobile-particles {
   position: absolute;
   inset: 0;
