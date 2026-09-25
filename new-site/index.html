@@ -361,12 +361,31 @@
 
   
   <script>
-    // 3D hero animation: desktop-only for now (mobile layout TBD)
-    if (!matchMedia("(max-width: 820px)").matches) {
-      var a3dScript = document.createElement("script");
-      a3dScript.type = "module";
-      a3dScript.src = "js/erp-animation.js?v=9";
-      document.body.appendChild(a3dScript);
+    // 3D hero animation: desktop-only, lazy-load when hero is in view
+    if (!matchMedia("(max-width: 820px)").matches && 'IntersectionObserver' in window) {
+      var hero = document.querySelector('.hero');
+      var loaded = false;
+      function load3D() {
+        if (loaded) return;
+        loaded = true;
+        var s = document.createElement('script');
+        s.type = 'module';
+        s.src = 'js/erp-animation.js?v=9';
+        document.body.appendChild(s);
+      }
+      if (hero) {
+        var io = new IntersectionObserver(function(entries){
+          entries.forEach(function(e){
+            if (e.isIntersecting) {
+              load3D();
+              io.disconnect();
+            }
+          });
+        }, { rootMargin: '200px' });
+        io.observe(hero);
+      } else {
+        load3D();
+      }
     }
   </script>
   <script src="js/main.min.js?v=21" defer></script>
