@@ -47,7 +47,7 @@ BUSINESS FUNCTIONS:
 Financial Management, Order Management, Inventory Management, Project Accounting, Production Management, CRM, Payroll & HR, Equipment Maintenance & Service, eCommerce & POS, Reporting & Analytics.
 
 HOW TO GET STARTED:
-Fill out our contact form at https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=U_4-PbulJ0urp7zViit3RvKkOh0WsE5HqE0rgEPurvhURUEzM0NVRlkzSlZVU1ZIRlFMNlJGUUZKUC4u or call +256 705 969313 for a free consultation.`;
+Fill out our contact form at https://accware.ug/reach-us.html or call +256 705 969313 for a free consultation.`;
 
 const CONTACT_REQUEST = `\n\nFIRST INTERACTION RULE (IMPORTANT):\nAfter answering the user's very first question, you MUST add this exact message at the end of your response:\n\n"To better assist you, could you share your name and preferred contact method (phone number or email)? This will help us follow up if needed."\n\nDo NOT ask for contact info on subsequent messages — only after the first question.`;
 

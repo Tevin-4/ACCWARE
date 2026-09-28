@@ -50,7 +50,7 @@
       title: "Company",
       links: [
         { href: "about.html", label: "About" },
-        { href: "https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=U_4-PbulJ0urp7zViit3RvKkOh0WsE5HqE0rgEPurvhURUEzM0NVRlkzSlZVU1ZIRlFMNlJGUUZKUC4u", label: "Contacts" },
+        { href: "reach-us.html", label: "Contacts" },
         { href: "blog.html", label: "Blog" },
         { href: "privacy.html", label: "Privacy" }
       ]
@@ -87,9 +87,8 @@
       var cls = current === link.href ? ' class="active" aria-current="page"' : "";
       return '<li><a href="' + link.href + '"' + cls + ">" + link.label + "</a></li>";
     });
-    var ctaCls = current === "reach-us.html" ? ' class="active" aria-current="page"' : "";
     items.push(
-      '<li class="nav-cta"><a class="btn btn-gold"' + ctaCls + ' href="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=U_4-PbulJ0urp7zViit3RvKkOh0WsE5HqE0rgEPurvhURUEzM0NVRlkzSlZVU1ZIRlFMNlJGUUZKUC4u">Get in Touch</a></li>'
+      '<li class="nav-cta"><a class="btn btn-gold" href="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=U_4-PbulJ0urp7zViit3RvKkOh0WsE5HqE0rgEPurvhURUEzM0NVRlkzSlZVU1ZIRlFMNlJGUUZKUC4u">Book a Demo</a></li>'
     );
     return items.join("");
   }
@@ -111,8 +110,8 @@
       cols.join("") +
       "</div>" +
       '<div class="footer-bottom">' +
-      "<div>© " + year + " Accware Solutions. All rights reserved.</div>" +
-      '<div><a href="privacy.html">Privacy</a> · <a href="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=U_4-PbulJ0urp7zViit3RvKkOh0WsE5HqE0rgEPurvhURUEzM0NVRlkzSlZVU1ZIRlFMNlJGUUZKUC4u">Contact</a> · <a href="https://selfservice.accware.ug:8443/" target="_blank" rel="noopener">Support Portal</a></div>' +
+      "<div>ï¿½ " + year + " Accware Solutions. All rights reserved.</div>" +
+      '<div><a href="privacy.html">Privacy</a> ï¿½ <a href="reach-us.html">Contact</a> ï¿½ <a href="https://selfservice.accware.ug:8443/" target="_blank" rel="noopener">Support Portal</a></div>' +
       "</div>" +
       "</div>"
     );
@@ -134,7 +133,7 @@
       '<nav id="primary-nav" class="primary-nav" aria-label="Main navigation"><ul>' +
       navMarkup() +
       "</ul></nav>" +
-      '<a class="header-cta btn btn-gold" href="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=U_4-PbulJ0urp7zViit3RvKkOh0WsE5HqE0rgEPurvhURUEzM0NVRlkzSlZVU1ZIRlFMNlJGUUZKUC4u">Get in Touch</a>' +
+      '<a class="header-cta btn btn-gold" href="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=U_4-PbulJ0urp7zViit3RvKkOh0WsE5HqE0rgEPurvhURUEzM0NVRlkzSlZVU1ZIRlFMNlJGUUZKUC4u">Book a Demo</a>' +
       "</div>" +
       "</div>" +
       "</header>" +
@@ -347,7 +346,7 @@
       });
       var honey = form.elements["_honey"];
       if (honey && honey.value) return;
-      if (btn) { btn.disabled = true; btn.innerHTML = "Sending…"; }
+      if (btn) { btn.disabled = true; btn.innerHTML = "Sendingï¿½"; }
       if (status) status.textContent = "";
       fetch("/api/contact", {
         method: "POST",
